@@ -449,17 +449,17 @@ footer {
       <div class="step-card reveal">
         <div class="step-number">1</div>
         <h3>填写配置</h3>
-        <p>输入学号和密码，选择网络适配器，可选自动设置 IP 和开机自启</p>
+        <p>输入配置信息，自动设置 IP ，告别繁琐系统配置</p>
       </div>
       <div class="step-card reveal">
         <div class="step-number">2</div>
         <h3>一键连接</h3>
-        <p>点击"连接"按钮，自动完成 802.1X 认证和 DrCOM 心跳注册</p>
+        <p>点击"连接"按钮，自动完成认证连接</p>
       </div>
       <div class="step-card reveal">
         <div class="step-number">3</div>
         <h3>保持在线</h3>
-        <p>最小化到托盘，30 秒心跳自动维持，断线自动重连，无需任何操作</p>
+        <p>最小化到托盘，开机静默启动，自动连接</p>
       </div>
     </div>
   </div>
@@ -501,15 +501,29 @@ footer {
   const el = document.getElementById('typing-text');
   const text = '从未如此简单';
   let i = 0;
-  function type() {
-    if (i < text.length) {
-      el.textContent += text[i];
+  let deleting = false;
+
+  function tick() {
+    if (!deleting) {
       i++;
-      setTimeout(type, 120);
+      el.textContent = text.slice(0, i);
+      if (i === text.length) {
+        setTimeout(() => { deleting = true; tick(); }, 1500);
+        return;
+      }
+      setTimeout(tick, 120);
+    } else {
+      i--;
+      el.textContent = text.slice(0, i);
+      if (i === 0) {
+        setTimeout(() => { deleting = false; tick(); }, 400);
+        return;
+      }
+      setTimeout(tick, 60);
     }
   }
-  // Start typing after hero animations begin
-  setTimeout(type, 400);
+
+  setTimeout(tick, 500);
 })();
 
 /* ===== Particle Network Animation ===== */
