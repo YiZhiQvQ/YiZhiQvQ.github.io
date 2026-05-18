@@ -196,11 +196,9 @@ nav.scrolled {
   background: rgba(59,130,246,0.1);
   border: 1px solid rgba(59,130,246,0.2);
 }
-.feature-card:nth-child(2) .feature-icon { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.2); }
-.feature-card:nth-child(3) .feature-icon { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.2); }
-.feature-card:nth-child(4) .feature-icon { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.2); }
-.feature-card:nth-child(5) .feature-icon { background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.2); }
-.feature-card:nth-child(6) .feature-icon { background: rgba(244,114,182,0.1); border-color: rgba(244,114,182,0.2); }
+.feature-card:nth-child(1) .feature-icon { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.2); }
+.feature-card:nth-child(2) .feature-icon { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.2); }
+.feature-card:nth-child(3) .feature-icon { background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.2); }
 
 .feature-card h3 { margin-bottom: 0.75rem; color: #f1f5f9; }
 .feature-card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.7; }
@@ -241,26 +239,6 @@ nav.scrolled {
 .step-card:nth-child(4) .step-number { background: linear-gradient(135deg, #34d399, #22d3ee); box-shadow: 0 8px 25px rgba(52,211,153,0.35); }
 .step-card h3 { margin-bottom: 0.5rem; }
 .step-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
-
-/* ===== Stats ===== */
-.stats-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-}
-.stat-card {
-  text-align: center; padding: 2.5rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.stat-number {
-  font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.stat-label { color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; }
 
 /* ===== Download CTA ===== */
 .download-section {
@@ -334,7 +312,6 @@ footer {
   .steps { flex-wrap: wrap; }
   .steps::before { display: none; }
   .step-card { flex: 1 1 calc(50% - 0.75rem); }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   section { padding: 4rem 0; }
@@ -344,7 +321,6 @@ footer {
   .hero { min-height: auto; padding-top: 7rem; padding-bottom: 3rem; }
   .features-grid { grid-template-columns: 1fr; }
   .step-card { flex: 1 1 100%; }
-  .stats-grid { grid-template-columns: 1fr; }
   .download-card { padding: 2.5rem 1.5rem; }
   .footer-inner { flex-direction: column; text-align: center; }
 }
@@ -427,20 +403,6 @@ footer {
     <div class="features-grid">
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-        </div>
-        <h3>802.1X / EAPOL</h3>
-        <p>通过 Npcap 发送原始以太网帧，实现完整的 EAP-MD5 认证流程。支持自动重传与超时处理，确保认证可靠完成。</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <h3>DrCOM 心跳维持</h3>
-        <p>UDP 心跳每 30 秒自动发送，10 秒响应超时检测。实现 DrCOM 三套校验算法，确保会话持续有效。</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <h3>自动 IP 配置</h3>
@@ -459,13 +421,6 @@ footer {
         </div>
         <h3>开机自启</h3>
         <p>支持 Windows 任务计划自动启动，静默模式（--silent）下自动连接，托盘图标常驻，无感使用。</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-        </div>
-        <h3>Material UI 界面</h3>
-        <p>采用 Fluent/Material 风格设计，动态状态指示（连接中/已连接/已断开），深色/浅色自适应。</p>
       </div>
     </div>
   </div>
@@ -495,28 +450,6 @@ footer {
         <div class="step-number">3</div>
         <h3>保持在线</h3>
         <p>最小化到托盘，30 秒心跳自动维持，断线自动重连，无需任何操作</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="glass-divider"></div>
-
-<!-- Tech Stats -->
-<section>
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-card reveal">
-        <div class="stat-number">100<span style="font-size:1.5rem">ms</span></div>
-        <div class="stat-label">认证响应速度</div>
-      </div>
-      <div class="stat-card reveal">
-        <div class="stat-number">30<span style="font-size:1.5rem">s</span></div>
-        <div class="stat-label">心跳间隔</div>
-      </div>
-      <div class="stat-card reveal">
-        <div class="stat-number">&lt; 50<span style="font-size:1.5rem">MB</span></div>
-        <div class="stat-label">内存占用</div>
       </div>
     </div>
   </div>
