@@ -3,706 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SCUTNetLogin — 华南理工大学校园网认证工具</title>
-<meta name="description" content="SCUTNetLogin 是华南理工大学校园有线网认证客户端，一键连接，稳定在线。">
+<title>YiZhiQvQ</title>
+<meta name="description" content="个人项目导航">
+<link rel="icon" type="image/jpeg" href="/icon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body {
   font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
   background: #06090f;
   color: #e2e8f0;
-  line-height: 1.6;
-  overflow-x: hidden;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  display: flex; flex-direction: column; align-items: center;
 }
 
-/* ===== Particle Canvas ===== */
-#particles {
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  z-index: 0; pointer-events: none;
-}
-
-/* ===== Typography ===== */
-h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -0.03em; }
-h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
-h3 { font-size: 1.25rem; font-weight: 600; }
-.gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 40%, #34d399 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.gradient-text-cyan {
-  background: linear-gradient(135deg, #22d3ee 0%, #60a5fa 50%, #818cf8 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.typing-cursor {
-  display: inline-block;
-  font-weight: 300;
-  animation: blink 0.8s step-end infinite;
-  color: #22d3ee;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* ===== Layout ===== */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-section { padding: 6rem 0; position: relative; }
-
-/* ===== Navigation ===== */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 1rem 2rem;
-  transition: all 0.3s ease;
-}
-nav.scrolled {
-  background: rgba(6,9,15,0.75);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-}
-.nav-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo { display: flex; align-items: center; gap: 0.75rem; }
-.nav-logo img { height: 36px; width: 36px; }
-.nav-logo span { font-weight: 700; font-size: 1.2rem; color: #f1f5f9; }
-.nav-links { display: flex; gap: 2rem; align-items: center; }
-.nav-links a {
-  color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;
-  transition: color 0.2s; position: relative;
-}
-.nav-links a:hover { color: #e2e8f0; }
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
-  transition: width 0.3s ease; border-radius: 1px;
-}
-.nav-links a:hover::after { width: 100%; }
-.nav-cta {
-  padding: 0.5rem 1.25rem; border-radius: 9999px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: #fff !important; font-weight: 600 !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 4px 15px rgba(59,130,246,0.3);
-}
-.nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 25px rgba(59,130,246,0.45);
-}
-.nav-cta::after { display: none !important; }
-.menu-toggle { display: none; background: none; border: none; color: #e2e8f0; cursor: pointer; padding: 0.5rem; }
-
-/* ===== Hero ===== */
-.hero {
-  min-height: 100vh; display: flex; align-items: center;
-  padding-top: 5rem;
-}
-.hero-content { max-width: 700px; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.25);
-  border-radius: 9999px;
-  font-size: 0.85rem; font-weight: 500;
-  color: #93c5fd;
-  margin-bottom: 1.5rem;
-  animation: fadeInUp 0.6s ease;
-}
-.hero-badge-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #22d3ee;
-  box-shadow: 0 0 12px rgba(34,211,238,0.6);
-  animation: pulse-dot 2s infinite;
-}
-.hero h1 { margin-bottom: 1.5rem; line-height: 1.15; animation: fadeInUp 0.6s 0.1s ease both; }
-.hero-subtitle {
-  font-size: 1.15rem; color: #94a3b8; margin-bottom: 2.5rem;
-  line-height: 1.8; max-width: 560px;
-  animation: fadeInUp 0.6s 0.2s ease both;
-}
-.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeInUp 0.6s 0.3s ease both; }
-.btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.85rem 2rem; border-radius: 12px;
-  font-size: 1rem; font-weight: 600; text-decoration: none;
-  cursor: pointer; transition: all 0.3s ease;
-  border: none; position: relative; overflow: hidden;
-}
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(59,130,246,0.3);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(59,130,246,0.45);
-}
-.btn-primary:active { transform: translateY(0); }
-.btn-glass {
-  background: rgba(255,255,255,0.05);
-  color: #e2e8f0;
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.btn-glass:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-2px);
-}
-.hero-visual {
-  position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
-  width: 520px; height: 520px; animation: fadeInUp 0.8s 0.2s ease both;
+/* Background glow */
+body::before {
+  content: ''; position: fixed; top: -30%; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse at center, rgba(59,130,246,0.08), transparent 60%);
   pointer-events: none;
 }
-.hero-orb {
-  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
-}
-.hero-orb-1 { width: 400px; height: 400px; background: #3b82f6; top: 0; right: 0; animation: orbFloat 8s ease-in-out infinite; }
-.hero-orb-2 { width: 300px; height: 300px; background: #8b5cf6; bottom: 0; left: 0; animation: orbFloat 10s ease-in-out 1s infinite; }
-.hero-orb-3 { width: 200px; height: 200px; background: #22d3ee; top: 50%; left: 50%; animation: orbFloat 6s ease-in-out 2s infinite; }
 
-/* ===== Features ===== */
-.features-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+header {
+  text-align: center; padding: 6rem 2rem 3rem;
+  position: relative; z-index: 1;
 }
-.feature-card {
+header h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+  letter-spacing: -0.03em; margin-bottom: 0.75rem;
+}
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #34d399 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header p {
+  color: #64748b; font-size: 1.05rem;
+}
+
+.projects {
+  display: flex; flex-wrap: wrap; gap: 1.25rem;
+  max-width: 720px; width: 100%; padding: 0 1.5rem 4rem;
+  position: relative; z-index: 1;
+}
+.project-card {
+  flex: 1 1 280px;
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 20px; padding: 2.5rem 2rem;
-  transition: all 0.4s ease;
-  position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; padding: 2rem;
+  text-decoration: none; color: inherit;
+  transition: all 0.35s ease;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-.feature-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  opacity: 0; transition: opacity 0.4s;
-}
-.feature-card:hover::before { opacity: 1; }
-.feature-card:hover {
-  transform: translateY(-8px);
+.project-card:hover {
+  transform: translateY(-4px);
   background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.12);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(59,130,246,0.05);
+  border-color: rgba(255,255,255,0.14);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
 }
-.feature-icon {
-  width: 56px; height: 56px; border-radius: 16px;
+.project-icon {
+  width: 44px; height: 44px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1.5rem; font-size: 1.5rem;
-  background: rgba(59,130,246,0.1);
+  margin-bottom: 1rem; font-size: 1.2rem;
+  background: rgba(59,130,246,0.12);
   border: 1px solid rgba(59,130,246,0.2);
 }
-.feature-card:nth-child(1) .feature-icon { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.2); }
-.feature-card:nth-child(2) .feature-icon { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.2); }
-.feature-card:nth-child(3) .feature-icon { background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.2); }
+.project-card h2 {
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;
+  color: #f1f5f9;
+}
+.project-card .desc {
+  font-size: 0.9rem; color: #94a3b8; line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+.project-card .tag {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 500;
+  padding: 0.2rem 0.6rem; border-radius: 9999px;
+  background: rgba(59,130,246,0.1);
+  color: #93c5fd;
+}
+.project-card .arrow {
+  display: inline-block; margin-left: 0.25rem;
+  transition: transform 0.25s ease;
+}
+.project-card:hover .arrow { transform: translateX(3px); }
 
-.feature-card h3 { margin-bottom: 0.75rem; color: #f1f5f9; }
-.feature-card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.7; }
-
-/* ===== Section Headers ===== */
-.section-header { text-align: center; margin-bottom: 4rem; }
-.section-header h2 { margin-bottom: 1rem; }
-.section-header p { color: #94a3b8; font-size: 1.1rem; max-width: 500px; margin: 0 auto; }
-
-/* ===== How it Works ===== */
-.steps { display: flex; gap: 1.5rem; position: relative; }
-.steps::before {
-  content: ''; position: absolute; top: 40px; left: 60px; right: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(59,130,246,0.4), rgba(139,92,246,0.4), rgba(34,211,238,0.4));
-  z-index: 0;
-}
-.step-card {
-  flex: 1; text-align: center; position: relative; z-index: 1;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 20px; padding: 2.5rem 1.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
-}
-.step-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.12); }
-.step-number {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: #fff; font-weight: 800; font-size: 1.2rem;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.25rem;
-  box-shadow: 0 8px 25px rgba(59,130,246,0.35);
-}
-.step-card:nth-child(2) .step-number { background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 8px 25px rgba(139,92,246,0.35); }
-.step-card:nth-child(3) .step-number { background: linear-gradient(135deg, #22d3ee, #3b82f6); box-shadow: 0 8px 25px rgba(34,211,238,0.35); }
-.step-card:nth-child(4) .step-number { background: linear-gradient(135deg, #34d399, #22d3ee); box-shadow: 0 8px 25px rgba(52,211,153,0.35); }
-.step-card h3 { margin-bottom: 0.5rem; }
-.step-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
-
-/* ===== Download CTA ===== */
-.download-section {
-  text-align: center;
-}
-.download-card {
-  display: inline-block; text-align: center;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 24px; padding: 4rem 3rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative; overflow: hidden;
-  max-width: 600px; width: 100%;
-}
-.download-card::before {
-  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle at center, rgba(59,130,246,0.06), transparent 60%);
-  pointer-events: none;
-}
-.download-card h2 { margin-bottom: 1rem; }
-.download-card p { color: #94a3b8; margin-bottom: 2rem; }
-.download-info { margin-top: 1.5rem; color: #64748b; font-size: 0.85rem; }
-
-/* ===== Footer ===== */
 footer {
-  border-top: 1px solid rgba(255,255,255,0.06);
-  padding: 3rem 2rem;
+  margin-top: auto; padding: 2rem;
+  text-align: center; color: #475569; font-size: 0.8rem;
+  position: relative; z-index: 1;
 }
-.footer-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem;
-}
-.footer-text { color: #64748b; font-size: 0.85rem; }
-.footer-links { display: flex; gap: 1.5rem; }
-.footer-links a { color: #64748b; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-.footer-links a:hover { color: #94a3b8; }
+footer a { color: #64748b; text-decoration: none; }
+footer a:hover { color: #94a3b8; }
 
-/* ===== Glass divider ===== */
-.glass-divider {
-  width: 100%; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-  margin: 0 auto; max-width: 1200px;
-}
-
-/* ===== Animations ===== */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
-}
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 12px rgba(34,211,238,0.6); }
-  50% { box-shadow: 0 0 24px rgba(34,211,238,1); }
-}
-.reveal {
-  opacity: 0; transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ===== Responsive ===== */
-@media (max-width: 1024px) {
-  .hero-visual { display: none; }
-  .features-grid { grid-template-columns: repeat(2, 1fr); }
-  .steps { flex-wrap: wrap; }
-  .steps::before { display: none; }
-  .step-card { flex: 1 1 calc(50% - 0.75rem); }
-}
-@media (max-width: 768px) {
-  section { padding: 4rem 0; }
-  .container { padding: 0 1.25rem; }
-  .nav-links { display: none; }
-  .menu-toggle { display: block; }
-  .hero { min-height: auto; padding-top: 7rem; padding-bottom: 3rem; }
-  .features-grid { grid-template-columns: 1fr; }
-  .step-card { flex: 1 1 100%; }
-  .download-card { padding: 2.5rem 1.5rem; }
-  .footer-inner { flex-direction: column; text-align: center; }
-}
 @media (max-width: 480px) {
-  h1 { font-size: 2rem; }
-  .hero-buttons { flex-direction: column; }
-  .btn { justify-content: center; }
+  header { padding: 4rem 1.25rem 2rem; }
+  .projects { padding: 0 1rem 3rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- Particle Canvas -->
-<canvas id="particles"></canvas>
+<header>
+  <h1><span class="gradient-text">YiZhiQvQ</span></h1>
+  <p>一些个人项目</p>
+</header>
 
-<!-- Navigation -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <img src="../res/SCUTNetLogin.png" alt="SCUTNetLogin" onerror="this.style.display='none'">
-      <span>SCUTNetLogin</span>
-    </a>
-    <div class="nav-links">
-      <a href="#features">功能特性</a>
-      <a href="#how-it-works">使用流程</a>
-      <a href="#download" class="nav-cta">立即下载</a>
+<div class="projects">
+  <a href="/scutnetlogin/" class="project-card">
+    <div class="project-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
     </div>
-    <button class="menu-toggle" aria-label="菜单">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
-  </div>
-</nav>
+    <h2>SCUTNetLogin <span class="arrow">&rarr;</span></h2>
+    <p class="desc">华南理工大学校园有线网认证客户端，一键连接，稳定在线。</p>
+    <span class="tag">Qt 6 / C++</span>
+  </a>
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        华南理工大学 · 校园网认证
-      </div>
-      <h1>
-        连接校园网，<br>
-        <span class="gradient-text-cyan" id="typing-text"></span><span class="typing-cursor">|</span>
-      </h1>
-      <p class="hero-subtitle">
-        SCUTNetLogin 是专为华南理工大学设计的校园有线网络认证客户端。
-        一键连接，稳定在线。
-      </p>
-      <div class="hero-buttons">
-        <a href="#download" class="btn btn-primary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          立即下载
-        </a>
-        <a href="#features" class="btn btn-glass">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          了解更多
-        </a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-orb hero-orb-1"></div>
-      <div class="hero-orb hero-orb-2"></div>
-      <div class="hero-orb hero-orb-3"></div>
-    </div>
-  </div>
-</section>
+  <!-- 新项目模板
+  <a href="/project-name/" class="project-card">
+    <div class="project-icon">...</div>
+    <h2>Project Name <span class="arrow">&rarr;</span></h2>
+    <p class="desc">简短描述。</p>
+    <span class="tag">标签</span>
+  </a>
+  -->
+</div>
 
-<div class="glass-divider"></div>
-
-<!-- Features Section -->
-<section id="features">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2><span class="gradient-text">功能丰富</span>，稳定连接</h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <h3>自动 IP 配置</h3>
-        <p>认证前自动设置静态 IP/DNS，断连后恢复 DHCP。通过 netsh 实现，全程静默无弹窗，无需手动配置。</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h3>轻量高效</h3>
-        <p>基于 Qt 6.11 + C++17 构建，多线程架构。EAP 和 UDP 分别在独立线程运行，界面响应零延迟。</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        </div>
-        <h3>开机自启</h3>
-        <p>支持 Windows 任务计划自动启动，静默模式（--silent）下自动连接，托盘图标常驻，无感使用。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="glass-divider"></div>
-
-<!-- How it Works -->
-<section id="how-it-works">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2><span class="gradient-text">三步</span>完成认证</h2>
-      <p>从配置到连接，简单到只需要几次点击</p>
-    </div>
-    <div class="steps">
-      <div class="step-card reveal">
-        <div class="step-number">1</div>
-        <h3>填写配置</h3>
-        <p>输入配置信息，自动设置 IP ，告别繁琐系统配置</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-number">2</div>
-        <h3>一键连接</h3>
-        <p>点击"连接"按钮，自动完成认证连接</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-number">3</div>
-        <h3>保持在线</h3>
-        <p>最小化到托盘，开机静默启动，自动连接</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="glass-divider"></div>
-
-<!-- Download -->
-<section id="download">
-  <div class="container">
-    <div class="download-section">
-      <div class="download-card reveal">
-        <h2><span class="gradient-text-cyan">准备好连接了吗？</span></h2>
-        <p>免费、开源、专为华工校园网打造。<br>支持 Windows 10/11 x64。</p>
-        <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/releases" class="btn btn-primary" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          前往 GitHub Releases 下载
-        </a>
-        <p class="download-info">或访问 GitHub 仓库查看源码与安装说明</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
 <footer>
-  <div class="footer-inner">
-    <p class="footer-text">&copy; 2025 SCUTNetLogin. Open source under MIT License.</p>
-    <div class="footer-links">
-      <a href="https://github.com/YiZhiQvQ/SCUTNetLogin" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/issues" target="_blank" rel="noopener">反馈问题</a>
-    </div>
-  </div>
+  <a href="https://github.com/YiZhiQvQ" target="_blank" rel="noopener">GitHub</a>
 </footer>
-
-<script>
-/* ===== Typing Animation ===== */
-(function() {
-  const el = document.getElementById('typing-text');
-  const text = '从未如此简单';
-  let i = 0;
-  let deleting = false;
-
-  function tick() {
-    if (!deleting) {
-      i++;
-      el.textContent = text.slice(0, i);
-      if (i === text.length) {
-        setTimeout(() => { deleting = true; tick(); }, 1500);
-        return;
-      }
-      setTimeout(tick, 120);
-    } else {
-      i--;
-      el.textContent = text.slice(0, i);
-      if (i === 0) {
-        setTimeout(() => { deleting = false; tick(); }, 400);
-        return;
-      }
-      setTimeout(tick, 60);
-    }
-  }
-
-  setTimeout(tick, 500);
-})();
-
-/* ===== Particle Network Animation ===== */
-(function() {
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let mouse = { x: null, y: null, radius: 120 };
-  const particleCount = 80;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  class Particle {
-    constructor() {
-      this.reset();
-      this.y = Math.random() * canvas.height;
-    }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.6;
-      this.vy = (Math.random() - 0.5) * 0.6;
-      this.radius = Math.random() * 2 + 1;
-      this.opacity = Math.random() * 0.5 + 0.1;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-      // Mouse interaction
-      if (mouse.x != null) {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          this.x += (dx / dist) * force * 2;
-          this.y += (dy / dist) * force * 2;
-        }
-      }
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(96, 165, 250, ${this.opacity})`;
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-
-  function connect() {
-    const maxDist = 140;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          const opacity = (1 - dist / maxDist) * 0.15;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    connect();
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-
-  // Disable mouse tracking on mobile for perf
-  if (window.innerWidth > 768) {
-    window.addEventListener('mousemove', e => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-    window.addEventListener('mouseleave', () => {
-      mouse.x = null;
-      mouse.y = null;
-    });
-  }
-})();
-
-/* ===== Navbar scroll effect ===== */
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-/* ===== Scroll reveal ===== */
-const revealEls = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-revealEls.forEach(el => revealObserver.observe(el));
-
-/* ===== Mobile nav ===== */
-(function() {
-  const style = document.createElement('style');
-  style.textContent = `
-    @media (max-width: 768px) {
-      .nav-links.open {
-        display: flex !important;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 1rem; right: 1rem;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 16px;
-        padding: 1.5rem;
-        gap: 1rem;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      }
-    }
-  `;
-  document.head.appendChild(style);
-
-  const toggle = document.querySelector('.menu-toggle');
-  const links = document.querySelector('.nav-links');
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    links.classList.toggle('open');
-  });
-
-  // Close on link click
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => links.classList.remove('open'));
-  });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!links.contains(e.target) && !toggle.contains(e.target)) {
-      links.classList.remove('open');
-    }
-  });
-})();
-
-/* Smooth scroll offset for fixed nav */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      const offset = 80;
-      window.scrollTo({
-        top: target.offsetTop - offset,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-</script>
 
 </body>
 </html>
