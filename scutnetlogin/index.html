@@ -6,6 +6,10 @@
 <title>SCUTNetLogin — 华南理工大学校园网认证工具</title>
 <meta name="description" content="SCUTNetLogin 是华南理工大学校园有线网认证客户端，一键连接，稳定在线。">
 <link rel="icon" type="image/x-icon" href="SCUTNetwork.ico">
+<meta property="og:title" content="SCUTNetLogin — 华南理工大学校园网认证工具">
+<meta property="og:description" content="专为华工设计的校园有线网络认证客户端。一键连接，稳定在线。">
+<meta property="og:image" content="assets/shot_connected.png">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
@@ -76,7 +80,7 @@ nav.scrolled {
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
-.nav-logo img { height: 36px; width: 36px; }
+.nav-logo img { height: 36px; width: 36px; border-radius: 9px; }
 .nav-logo span { font-weight: 700; font-size: 1.2rem; color: #f1f5f9; }
 .nav-links { display: flex; gap: 2rem; align-items: center; }
 .nav-links a {
@@ -109,7 +113,13 @@ nav.scrolled {
   min-height: 100vh; display: flex; align-items: center;
   padding-top: 5rem;
 }
-.hero-content { max-width: 700px; }
+.hero .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 44%);
+  gap: 4rem;
+  align-items: center;
+}
+.hero-content { max-width: 640px; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.4rem 1rem;
@@ -130,7 +140,7 @@ nav.scrolled {
 .hero h1 { margin-bottom: 1.5rem; line-height: 1.15; animation: fadeInUp 0.6s 0.1s ease both; }
 .hero-subtitle {
   font-size: 1.15rem; color: #94a3b8; margin-bottom: 2.5rem;
-  line-height: 1.8; max-width: 560px;
+  line-height: 1.8; max-width: 520px;
   animation: fadeInUp 0.6s 0.2s ease both;
 }
 .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeInUp 0.6s 0.3s ease both; }
@@ -163,19 +173,42 @@ nav.scrolled {
   border-color: rgba(255,255,255,0.2);
   transform: translateY(-2px);
 }
+
+/* ===== Hero App Window (screenshot) ===== */
 .hero-visual {
-  position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
-  width: 520px; height: 520px; animation: fadeInUp 0.8s 0.2s ease both;
+  position: relative;
+  width: 100%; max-width: 520px; justify-self: end;
   pointer-events: none;
+  animation: fadeInUp 0.8s 0.25s ease both;
 }
+.app-window {
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.55), 0 0 80px rgba(59,130,246,0.12);
+  background: #0b1220;
+  animation: appFloat 7s ease-in-out infinite;
+}
+.app-window-bar {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.app-window-dot { width: 11px; height: 11px; border-radius: 50%; }
+.app-window-dot.r { background: #f87171; }
+.app-window-dot.y { background: #fbbf24; }
+.app-window-dot.g { background: #34d399; }
+.app-window-title {
+  margin-left: 0.6rem; font-size: 0.8rem; color: #94a3b8; font-weight: 500;
+}
+.app-window img { display: block; width: 100%; height: auto; }
 .hero-orb {
   position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
 }
-.hero-orb-1 { width: 400px; height: 400px; background: #3b82f6; top: 0; right: 0; animation: orbFloat 8s ease-in-out infinite; }
-.hero-orb-2 { width: 300px; height: 300px; background: #8b5cf6; bottom: 0; left: 0; animation: orbFloat 10s ease-in-out 1s infinite; }
-.hero-orb-3 { width: 200px; height: 200px; background: #22d3ee; top: 50%; left: 50%; animation: orbFloat 6s ease-in-out 2s infinite; }
+.hero-orb-1 { width: 420px; height: 420px; background: #3b82f6; top: -60px; right: -80px; animation: orbFloat 8s ease-in-out infinite; z-index: -1; }
+.hero-orb-2 { width: 320px; height: 320px; background: #8b5cf6; bottom: -40px; left: -80px; animation: orbFloat 10s ease-in-out 1s infinite; z-index: -1; }
 
-/* ===== Features ===== */
+/* ===== Sections ===== */
 .features-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
@@ -215,12 +248,60 @@ nav.scrolled {
 .feature-card h3 { margin-bottom: 0.75rem; color: #f1f5f9; }
 .feature-card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.7; }
 
-/* ===== Section Headers ===== */
 .section-header { text-align: center; margin-bottom: 4rem; }
 .section-header h2 { margin-bottom: 1rem; }
-.section-header p { color: #94a3b8; font-size: 1.1rem; max-width: 500px; margin: 0 auto; }
+.section-header p { color: #94a3b8; font-size: 1.1rem; max-width: 560px; margin: 0 auto; }
 
-/* ===== How it Works ===== */
+/* ===== UI Preview (screenshot gallery) ===== */
+.preview-gallery { max-width: 680px; margin: 0 auto; }
+.shot-frame {
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0b1220;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+}
+.shot-frame img {
+  display: block; width: 100%; height: auto;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.shot-frame img.active { opacity: 1; transform: translateY(0); }
+.preview-tabs {
+  display: inline-flex; gap: 0.4rem; margin-bottom: 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 9999px; padding: 0.35rem;
+  flex-wrap: wrap;
+}
+.preview-tab {
+  padding: 0.45rem 1.1rem; border-radius: 9999px;
+  font-size: 0.85rem; font-weight: 500; cursor: pointer;
+  color: #94a3b8; border: none; background: transparent;
+  transition: all 0.25s ease;
+}
+.preview-tab:hover { color: #e2e8f0; }
+.preview-tab.active {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #fff; font-weight: 600;
+  box-shadow: 0 4px 18px rgba(59,130,246,0.35);
+}
+.preview-caption { margin-top: 1rem; color: #64748b; font-size: 0.9rem; min-height: 1.6em; text-align: center; }
+
+@keyframes appFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 12px rgba(34,211,238,0.6); }
+  50% { box-shadow: 0 0 24px rgba(34,211,238,1); }
+}
+
+/* ===== Steps ===== */
 .steps { display: flex; gap: 1.5rem; position: relative; }
 .steps::before {
   content: ''; position: absolute; top: 40px; left: 60px; right: 60px;
@@ -248,14 +329,11 @@ nav.scrolled {
 }
 .step-card:nth-child(2) .step-number { background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 8px 25px rgba(139,92,246,0.35); }
 .step-card:nth-child(3) .step-number { background: linear-gradient(135deg, #22d3ee, #3b82f6); box-shadow: 0 8px 25px rgba(34,211,238,0.35); }
-.step-card:nth-child(4) .step-number { background: linear-gradient(135deg, #34d399, #22d3ee); box-shadow: 0 8px 25px rgba(52,211,153,0.35); }
 .step-card h3 { margin-bottom: 0.5rem; }
 .step-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
 
 /* ===== Download CTA ===== */
-.download-section {
-  text-align: center;
-}
+.download-section { text-align: center; }
 .download-card {
   display: inline-block; text-align: center;
   background: rgba(255,255,255,0.04);
@@ -264,7 +342,7 @@ nav.scrolled {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   position: relative; overflow: hidden;
-  max-width: 600px; width: 100%;
+  max-width: 620px; width: 100%;
 }
 .download-card::before {
   content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
@@ -274,6 +352,11 @@ nav.scrolled {
 .download-card h2 { margin-bottom: 1rem; }
 .download-card p { color: #94a3b8; margin-bottom: 2rem; }
 .download-info { margin-top: 1.5rem; color: #64748b; font-size: 0.85rem; }
+.download-meta {
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+  margin-top: 1.75rem; color: #94a3b8; font-size: 0.85rem;
+}
+.download-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
 
 /* ===== Footer ===== */
 footer {
@@ -302,15 +385,6 @@ footer {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
-}
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 12px rgba(34,211,238,0.6); }
-  50% { box-shadow: 0 0 24px rgba(34,211,238,1); }
-}
 .reveal {
   opacity: 0; transform: translateY(40px);
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -318,8 +392,12 @@ footer {
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ===== Responsive ===== */
+@media (max-width: 1080px) {
+  .hero { min-height: auto; padding-top: 7rem; padding-bottom: 3rem; }
+  .hero .container { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-visual { justify-self: center; max-width: 460px; }
+}
 @media (max-width: 1024px) {
-  .hero-visual { display: none; }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .steps { flex-wrap: wrap; }
   .steps::before { display: none; }
@@ -330,7 +408,6 @@ footer {
   .container { padding: 0 1.25rem; }
   .nav-links { display: none; }
   .menu-toggle { display: block; }
-  .hero { min-height: auto; padding-top: 7rem; padding-bottom: 3rem; }
   .features-grid { grid-template-columns: 1fr; }
   .step-card { flex: 1 1 100%; }
   .download-card { padding: 2.5rem 1.5rem; }
@@ -352,11 +429,12 @@ footer {
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="../res/SCUTNetLogin.png" alt="SCUTNetLogin" onerror="this.style.display='none'">
+      <img src="assets/logo.png" alt="SCUTNetLogin">
       <span>SCUTNetLogin</span>
     </a>
     <div class="nav-links">
       <a href="#features">功能特性</a>
+      <a href="#preview">界面展示</a>
       <a href="#how-it-works">使用流程</a>
       <a href="#download" class="nav-cta">立即下载</a>
     </div>
@@ -374,7 +452,7 @@ footer {
     <div class="hero-content">
       <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        华南理工大学 · 校园网认证
+        华南理工大学 · 校园网认证 · v1.0 全新界面
       </div>
       <h1>
         连接校园网，<br>
@@ -382,23 +460,32 @@ footer {
       </h1>
       <p class="hero-subtitle">
         SCUTNetLogin 是专为华南理工大学设计的校园有线网络认证客户端。
-        一键连接，稳定在线。
+        一键连接，稳定在线——安装以后，你甚至不会记得它在那里。
       </p>
       <div class="hero-buttons">
         <a href="#download" class="btn btn-primary">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           立即下载
         </a>
-        <a href="#features" class="btn btn-glass">
+        <a href="#preview" class="btn btn-glass">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          了解更多
+          查看界面
         </a>
       </div>
     </div>
+
     <div class="hero-visual">
       <div class="hero-orb hero-orb-1"></div>
       <div class="hero-orb hero-orb-2"></div>
-      <div class="hero-orb hero-orb-3"></div>
+      <div class="app-window">
+        <div class="app-window-bar">
+          <span class="app-window-dot r"></span>
+          <span class="app-window-dot y"></span>
+          <span class="app-window-dot g"></span>
+          <span class="app-window-title">SCUT 校园网认证</span>
+        </div>
+        <img src="assets/shot_connected.png" alt="SCUTNetLogin 已连接界面">
+      </div>
     </div>
   </div>
 </section>
@@ -410,6 +497,7 @@ footer {
   <div class="container">
     <div class="section-header reveal">
       <h2><span class="gradient-text">功能丰富</span>，稳定连接</h2>
+      <p>从 802.1X 认证到断线自动重连，一切都在后台安静完成</p>
     </div>
     <div class="features-grid">
       <div class="feature-card reveal">
@@ -439,6 +527,30 @@ footer {
 
 <div class="glass-divider"></div>
 
+<!-- UI Preview Section -->
+<section id="preview">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>全新<span class="gradient-text-cyan">界面</span>，一目了然</h2>
+      <p>连接、认证、断连状态实时可见；账号密码直接输入，回车即连接</p>
+    </div>
+    <div class="preview-gallery reveal">
+      <div class="preview-tabs" id="previewTabs">
+        <button class="preview-tab active" data-idx="0">未连接</button>
+        <button class="preview-tab" data-idx="1">认证中</button>
+        <button class="preview-tab" data-idx="2">已连接</button>
+        <button class="preview-tab" data-idx="3">设置</button>
+      </div>
+      <div class="shot-frame">
+        <img id="shotImg" src="assets/shot_disconnected.png" alt="SCUTNetLogin 界面截图">
+      </div>
+      <p class="preview-caption" id="previewCaption">未连接 · 点击下方按钮开始认证</p>
+    </div>
+  </div>
+</section>
+
+<div class="glass-divider"></div>
+
 <!-- How it Works -->
 <section id="how-it-works">
   <div class="container">
@@ -450,17 +562,17 @@ footer {
       <div class="step-card reveal">
         <div class="step-number">1</div>
         <h3>填写配置</h3>
-        <p>输入配置信息，自动设置 IP ，告别繁琐系统配置</p>
+        <p>输入账号密码，网卡参数自动检测，无需繁琐设置</p>
       </div>
       <div class="step-card reveal">
         <div class="step-number">2</div>
         <h3>一键连接</h3>
-        <p>点击"连接"按钮，自动完成认证连接</p>
+        <p>点击"连接"按钮（或直接回车），自动完成 802.1X 认证</p>
       </div>
       <div class="step-card reveal">
         <div class="step-number">3</div>
         <h3>保持在线</h3>
-        <p>最小化到托盘，开机静默启动，自动连接</p>
+        <p>最小化到托盘，开机静默启动，断线自动重连</p>
       </div>
     </div>
   </div>
@@ -474,11 +586,15 @@ footer {
     <div class="download-section">
       <div class="download-card reveal">
         <h2><span class="gradient-text-cyan">准备好连接了吗？</span></h2>
-        <p>免费、开源、专为华工校园网打造。<br>支持 Windows 10/11 x64。</p>
+        <p>免费、开源、专为华工校园网打造。<br>支持 Windows 10 / 11 x64。</p>
         <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/releases" class="btn btn-primary" target="_blank" rel="noopener">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           前往 GitHub Releases 下载
         </a>
+        <div class="download-meta">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>自包含安装包，无需配置环境</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>需管理员权限与 Npcap 驱动</span>
+        </div>
         <p class="download-info">或访问 GitHub 仓库查看源码与安装说明</p>
       </div>
     </div>
@@ -488,7 +604,7 @@ footer {
 <!-- Footer -->
 <footer>
   <div class="footer-inner">
-    <p class="footer-text">&copy; 2025 SCUTNetLogin. Open source under MIT License.</p>
+    <p class="footer-text">&copy; 2026 SCUTNetLogin. Open source under MIT License.</p>
     <div class="footer-links">
       <a href="https://github.com/YiZhiQvQ/SCUTNetLogin" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/issues" target="_blank" rel="noopener">反馈问题</a>
@@ -527,6 +643,51 @@ footer {
   setTimeout(tick, 500);
 })();
 
+/* ===== UI Preview Gallery ===== */
+(function() {
+  const shots = [
+    { src: 'assets/shot_disconnected.png', caption: '未连接 · 点击下方按钮开始认证' },
+    { src: 'assets/shot_connecting.png',  caption: '认证中 · 蓝色的弧线正在转动' },
+    { src: 'assets/shot_connected.png',   caption: '已连接 · 绿色对勾，心跳保持在线' },
+    { src: 'assets/shot_settings.png',    caption: '设置 · 网络 / 服务器 / 自动化一目了然' }
+  ];
+  const img = document.getElementById('shotImg');
+  const caption = document.getElementById('previewCaption');
+  const tabs = Array.from(document.querySelectorAll('.preview-tab'));
+  let current = 0;
+  let timer = null;
+
+  function show(idx) {
+    current = idx;
+    tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+    img.classList.remove('active');
+    setTimeout(() => {
+      img.src = shots[idx].src;
+      img.alt = shots[idx].caption;
+      img.classList.add('active');
+    }, 180);
+    caption.textContent = shots[idx].caption;
+  }
+
+  function startAuto() {
+    stopAuto();
+    timer = setInterval(() => show((current + 1) % shots.length), 4200);
+  }
+  function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+
+  tabs.forEach(t => t.addEventListener('click', () => {
+    stopAuto();
+    show(parseInt(t.dataset.idx));
+    setTimeout(startAuto, 12000);
+  }));
+
+  const gallery = document.querySelector('.preview-gallery');
+  gallery.addEventListener('mouseenter', stopAuto);
+  gallery.addEventListener('mouseleave', startAuto);
+  show(0);
+  startAuto();
+})();
+
 /* ===== Particle Network Animation ===== */
 (function() {
   const canvas = document.getElementById('particles');
@@ -561,7 +722,6 @@ footer {
       if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
       if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
-      // Mouse interaction
       if (mouse.x != null) {
         const dx = this.x - mouse.x;
         const dy = this.y - mouse.y;
@@ -614,7 +774,6 @@ footer {
 
   animate();
 
-  // Disable mouse tracking on mobile for perf
   if (window.innerWidth > 768) {
     window.addEventListener('mousemove', e => {
       mouse.x = e.clientX;
@@ -676,12 +835,10 @@ revealEls.forEach(el => revealObserver.observe(el));
     links.classList.toggle('open');
   });
 
-  // Close on link click
   links.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => links.classList.remove('open'));
   });
 
-  // Close on outside click
   document.addEventListener('click', (e) => {
     if (!links.contains(e.target) && !toggle.contains(e.target)) {
       links.classList.remove('open');
