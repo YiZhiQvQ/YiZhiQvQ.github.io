@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SCUTNetLogin — 华南理工大学校园网认证工具</title>
-<meta name="description" content="SCUTNetLogin 是华南理工大学校园有线网认证客户端，一键连接，稳定在线。">
+<title>SCUTNetLogin — 华南理工大学学生校园网认证客户端</title>
+<meta name="description" content="SCUTNetLogin 是华南理工大学校园网认证客户端：有线 802.1X + 无线 Web Portal 双模认证，一键连接，断线自动重连，无感登录。">
 <link rel="icon" type="image/x-icon" href="SCUTNetwork.ico">
-<meta property="og:title" content="SCUTNetLogin — 华南理工大学校园网认证工具">
-<meta property="og:description" content="专为华工设计的校园有线网络认证客户端。一键连接，稳定在线。">
+<meta property="og:title" content="SCUTNetLogin — 华南理工大学学生校园网认证客户端">
+<meta property="og:description" content="专为华工设计的校园网认证客户端：有线 802.1X + 无线 Web Portal，一键连接，稳定在线，无感登录。">
 <meta property="og:image" content="assets/shot_connected.png">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -452,15 +452,16 @@ footer {
     <div class="hero-content">
       <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        华南理工大学 · 校园网认证 
+        华南理工大学 · 学生校园网认证客户端
       </div>
       <h1>
         连接校园网，<br>
         <span class="gradient-text-cyan" id="typing-text"></span><span class="typing-cursor">|</span>
       </h1>
       <p class="hero-subtitle">
-        SCUTNetLogin 是专为华南理工大学设计的校园有线网络认证客户端。
-        一键连接，稳定在线——安装以后，你甚至不会记得它在那里。
+        SCUTNetLogin 是专为华南理工大学设计的校园网认证客户端：有线 802.1X
+        与无线 Web Portal 双模认证。一个软件，覆盖宿舍与校园 Wi-Fi——
+        一键连接，断线自动重连，登录过程安静地在后台完成。
       </p>
       <div class="hero-buttons">
         <a href="#download" class="btn btn-primary">
@@ -482,7 +483,7 @@ footer {
           <span class="app-window-dot r"></span>
           <span class="app-window-dot y"></span>
           <span class="app-window-dot g"></span>
-          <span class="app-window-title">SCUT 校园网认证</span>
+          <span class="app-window-title">华南理工大学·学生校园网认证客户端</span>
         </div>
         <img src="assets/shot_connected.png" alt="SCUTNetLogin 已连接界面">
       </div>
@@ -497,29 +498,29 @@ footer {
   <div class="container">
     <div class="section-header reveal">
       <h2><span class="gradient-text">功能丰富</span>，稳定连接</h2>
-      <p>从 802.1X 认证到断线自动重连，一切都在后台安静完成</p>
+      <p>有线 802.1X 与无线 Web Portal，从认证到重连，一切在后台安静完成</p>
     </div>
     <div class="features-grid">
       <div class="feature-card reveal">
         <div class="feature-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
-        <h3>自动 IP 配置</h3>
-        <p>认证前自动设置静态 IP/DNS，断连后恢复 DHCP。通过 netsh 实现，全程静默无弹窗，无需手动配置。</p>
+        <h3>有线 + 无线双模</h3>
+        <p>网线插入走 802.1X；未插网线且命中白名单 Wi-Fi 时走 Dr.COM Web Portal，自动识别门户、模拟浏览器登录并按官方接口确认上线——无需手动选择方式。</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
-        <h3>轻量高效</h3>
-        <p>基于 Qt 6.11 + C++17 构建，多线程架构。EAP 和 UDP 分别在独立线程运行，界面响应零延迟。</p>
+        <h3>断线自动恢复</h3>
+        <p>被服务器踢下线自动重连；凌晨 0:00–6:00 强制下线后等待 6:00 自动恢复。心跳超时不会误触发断线（有意的稳健设计）。</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
         </div>
-        <h3>开机自启</h3>
-        <p>支持 Windows 任务计划自动启动，静默模式（--silent）下自动连接，托盘图标常驻，无感使用。</p>
+        <h3>后台安静陪伴</h3>
+        <p>支持 Windows 计划任务开机自启，静默模式（--silent）下自动连接；托盘常驻；静态 IP 自动配置、断开恢复 DHCP；日志按日归档。</p>
       </div>
     </div>
   </div>
@@ -531,8 +532,8 @@ footer {
 <section id="preview">
   <div class="container">
     <div class="section-header reveal">
-      <h2>全新<span class="gradient-text-cyan">界面</span>，一目了然</h2>
-      <p>连接、认证、断连状态实时可见；账号密码直接输入，回车即连接</p>
+      <h2>界面<span class="gradient-text-cyan">一目了然</span></h2>
+      <p>连接、认证、断连状态与当前连接模式实时可见；账号密码直接输入，回车即连接</p>
     </div>
     <div class="preview-gallery reveal">
       <div class="preview-tabs" id="previewTabs">
@@ -545,6 +546,7 @@ footer {
         <img id="shotImg" src="assets/shot_disconnected.png" alt="SCUTNetLogin 界面截图">
       </div>
       <p class="preview-caption" id="previewCaption">未连接 · 点击下方按钮开始认证</p>
+      <p style="margin-top:1.2rem;color:#475569;font-size:0.8rem;text-align:center;">截图可能随版本更新，以实际程序界面为准。</p>
     </div>
   </div>
 </section>
@@ -555,24 +557,24 @@ footer {
 <section id="how-it-works">
   <div class="container">
     <div class="section-header reveal">
-      <h2><span class="gradient-text">三步</span>完成认证</h2>
-      <p>从配置到连接，简单到只需要几次点击</p>
+      <h2><span class="gradient-text">几步</span>即可上网</h2>
+      <p>无需切换方式——插入网线走有线，未插网线且连接校园 Wi-Fi 时自动走无线</p>
     </div>
     <div class="steps">
       <div class="step-card reveal">
         <div class="step-number">1</div>
-        <h3>填写配置</h3>
-        <p>输入账号密码，网卡参数自动检测，无需繁琐设置</p>
+        <h3>填写账号</h3>
+        <p>输入学号与密码（可记住密码），有线网卡参数自动检测，静态 IP/DNS 可选配置</p>
       </div>
       <div class="step-card reveal">
         <div class="step-number">2</div>
-        <h3>一键连接</h3>
-        <p>点击"连接"按钮（或直接回车），自动完成 802.1X 认证</p>
+        <h3>点击连接</h3>
+        <p>点「连接」或直接回车。自动按"有线优先、无线兜底"发起认证，全程后台完成</p>
       </div>
       <div class="step-card reveal">
         <div class="step-number">3</div>
-        <h3>保持在线</h3>
-        <p>最小化到托盘，开机静默启动，断线自动重连</p>
+        <h3>安心使用</h3>
+        <p>最小化到托盘，开机静默启动自动连接；被踢下线自动重连，夜间断网晨间自动恢复</p>
       </div>
     </div>
   </div>
@@ -586,14 +588,14 @@ footer {
     <div class="download-section">
       <div class="download-card reveal">
         <h2><span class="gradient-text-cyan">准备好连接了吗？</span></h2>
-        <p>免费、开源、专为华工校园网打造。<br>支持 Windows 10 / 11 x64。</p>
+        <p>免费、开源，专为华工校园网打造。<br>支持 Windows 10 / 11 x64，有线与校园 Wi-Fi 通用。</p>
         <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/releases" class="btn btn-primary" target="_blank" rel="noopener">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           前往 GitHub Releases 下载
         </a>
         <div class="download-meta">
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>自包含安装包，无需配置环境</span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>需管理员权限与 Npcap 驱动</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>自包含安装包，免配置环境</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>需管理员权限；有线认证依赖 Npcap</span>
         </div>
         <p class="download-info">或访问 GitHub 仓库查看源码与安装说明</p>
       </div>
@@ -616,7 +618,7 @@ footer {
 /* ===== Typing Animation ===== */
 (function() {
   const el = document.getElementById('typing-text');
-  const text = '从未如此简单';
+  const text = '无感登录';
   let i = 0;
   let deleting = false;
 
@@ -647,9 +649,9 @@ footer {
 (function() {
   const shots = [
     { src: 'assets/shot_disconnected.png', caption: '未连接 · 点击下方按钮开始认证' },
-    { src: 'assets/shot_connecting.png',  caption: '认证中 · 蓝色的弧线正在转动' },
-    { src: 'assets/shot_connected.png',   caption: '已连接 · 绿色对勾，心跳保持在线' },
-    { src: 'assets/shot_settings.png',    caption: '设置 · 网络 / 服务器 / 自动化一目了然' }
+    { src: 'assets/shot_connecting.png',  caption: '认证中 · 状态指示器旋转，日志实时显示进度' },
+    { src: 'assets/shot_connected.png',   caption: '已连接 · 绿色对勾 + 当前连接模式（有线/无线）' },
+    { src: 'assets/shot_settings.png',    caption: '设置 · 有线网络配置 / 无线网络配置 / 自动化' }
   ];
   const img = document.getElementById('shotImg');
   const caption = document.getElementById('previewCaption');
