@@ -5,640 +5,731 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SCUTNetLogin — 华南理工大学学生校园网认证客户端</title>
 <meta name="description" content="SCUTNetLogin 是华南理工大学校园网认证客户端：有线 802.1X + 无线 Web Portal 双模认证，一键连接，断线自动重连，无感登录。">
+<meta name="theme-color" content="#fbfaf8">
 <link rel="icon" type="image/x-icon" href="SCUTNetwork.ico">
+<link rel="canonical" href="https://yizhiqvq.github.io/scutnetlogin/">
 <meta property="og:title" content="SCUTNetLogin — 华南理工大学学生校园网认证客户端">
 <meta property="og:description" content="专为华工设计的校园网认证客户端：有线 802.1X + 无线 Web Portal，一键连接，稳定在线，无感登录。">
 <meta property="og:image" content="assets/shot_connected.png">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ===== Reset & Base ===== */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
-  background: #06090f;
-  color: #e2e8f0;
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+/* ============================================================
+   SCUTNetLogin — Editorial Light-Luxury Theme
+   ============================================================ */
+:root {
+  --bg:        #fbfaf8;
+  --bg-soft:   #f5f3ef;
+  --ink:       #15171b;
+  --ink-soft:  #3a3e45;
+  --muted:     #787c84;
+  --faint:     #a5a29b;
+  --line:      #e5e1d9;
+  --line-soft: #eeebe4;
+  --gold:      #9a7b4f;
+  --gold-soft: #c9ae82;
+  --blue:      #1b4b8f;
+  --white:     #ffffff;
+
+  --serif: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', serif;
+  --sans:  'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --shadow-sm: 0 1px 2px rgba(21,23,27,.04), 0 10px 28px -16px rgba(21,23,27,.14);
+  --shadow-md: 0 2px 6px rgba(21,23,27,.04), 0 30px 60px -32px rgba(21,23,27,.22);
+  --shadow-lg: 0 2px 8px rgba(21,23,27,.04), 0 48px 100px -48px rgba(21,23,27,.34);
+
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --nav-h: 76px;
 }
 
-/* ===== Particle Canvas ===== */
-#particles {
-  position: fixed; top:0; left:0; width:100%; height:100%;
+/* ===== Reset ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; }
+a { color: inherit; }
+
+/* Warm ambient wash */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
   z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(58% 38% at 8% -4%, rgba(154,123,79,.075), transparent 62%),
+    radial-gradient(46% 34% at 102% 4%, rgba(27,75,143,.055), transparent 62%);
 }
 
 /* ===== Typography ===== */
-h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -0.03em; }
-h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
-h3 { font-size: 1.25rem; font-weight: 600; }
-.gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 40%, #34d399 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; color: var(--ink); }
+h1 {
+  font-size: clamp(2.55rem, 5.4vw, 4.15rem);
+  line-height: 1.16;
+  letter-spacing: .015em;
 }
-.gradient-text-cyan {
-  background: linear-gradient(135deg, #22d3ee 0%, #60a5fa 50%, #818cf8 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+h2 {
+  font-size: clamp(1.85rem, 3.4vw, 2.6rem);
+  line-height: 1.3;
+  letter-spacing: .02em;
 }
+h3 { font-size: 1.18rem; font-weight: 500; letter-spacing: .02em; }
+.accent { color: var(--gold); }
 
-.typing-cursor {
-  display: inline-block;
-  font-weight: 300;
-  animation: blink 0.8s step-end infinite;
-  color: #22d3ee;
+.eyebrow {
+  display: flex; align-items: center; gap: .85rem;
+  font-family: var(--sans);
+  font-size: .7rem; font-weight: 500;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--gold);
 }
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.eyebrow::before {
+  content: ''; flex: 0 0 auto;
+  width: 26px; height: 1px; background: var(--gold-soft);
 }
+.lede { color: var(--muted); font-weight: 300; line-height: 1.95; }
 
 /* ===== Layout ===== */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-section { padding: 6rem 0; position: relative; }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 1; }
+section { padding: 7.5rem 0; position: relative; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 2000;
+  background: var(--ink); color: var(--bg); padding: .75rem 1.25rem;
+  font-size: .8rem; letter-spacing: .12em; text-decoration: none;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
 
 /* ===== Navigation ===== */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 1rem 2rem;
-  transition: all 0.3s ease;
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: background .45s var(--ease), border-color .45s var(--ease), backdrop-filter .45s;
 }
-nav.scrolled {
-  background: rgba(6,9,15,0.75);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+.site-nav.scrolled {
+  background: rgba(251,250,248,.82);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom-color: var(--line);
 }
 .nav-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  position: relative;
 }
-.nav-logo { display: flex; align-items: center; gap: 0.75rem; }
-.nav-logo img { height: 36px; width: 36px; border-radius: 9px; }
-.nav-logo span { font-weight: 700; font-size: 1.2rem; color: #f1f5f9; }
-.nav-links { display: flex; gap: 2rem; align-items: center; }
+.brand { display: flex; align-items: center; gap: .85rem; text-decoration: none; }
+.brand-mark {
+  width: 40px; height: 40px; flex: 0 0 auto;
+  display: grid; place-items: center;
+  background: var(--white);
+  border: 1px solid var(--line); border-radius: 3px;
+}
+.brand-mark img { width: 26px; height: 26px; display: block; border-radius: 2px; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand-text strong {
+  font-size: .95rem; font-weight: 500; letter-spacing: .07em; color: var(--ink);
+}
+.brand-text em {
+  font-style: normal; font-size: .64rem; letter-spacing: .2em;
+  color: var(--faint); text-transform: uppercase;
+}
+.nav-links { display: flex; align-items: center; gap: 2.4rem; }
 .nav-links a {
-  color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;
-  transition: color 0.2s; position: relative;
+  position: relative;
+  font-size: .82rem; font-weight: 400; letter-spacing: .12em;
+  color: var(--muted); text-decoration: none;
+  transition: color .3s var(--ease);
+  white-space: nowrap;
 }
-.nav-links a:hover { color: #e2e8f0; }
 .nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
-  transition: width 0.3s ease; border-radius: 1px;
+  content: ''; position: absolute; left: 0; bottom: -7px;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width .45s var(--ease);
 }
+.nav-links a:hover { color: var(--ink); }
 .nav-links a:hover::after { width: 100%; }
 .nav-cta {
-  padding: 0.5rem 1.25rem; border-radius: 9999px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: #fff !important; font-weight: 600 !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 4px 15px rgba(59,130,246,0.3);
-}
-.nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 25px rgba(59,130,246,0.45);
+  padding: .7rem 1.5rem;
+  background: var(--ink); color: var(--bg) !important;
+  font-size: .74rem !important; font-weight: 500 !important;
+  letter-spacing: .16em !important; text-transform: uppercase;
+  border-radius: 2px;
+  transition: background .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease) !important;
 }
 .nav-cta::after { display: none !important; }
-.menu-toggle { display: none; background: none; border: none; color: #e2e8f0; cursor: pointer; padding: 0.5rem; }
+.nav-cta:hover { background: #000; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+.menu-toggle {
+  display: none;
+  width: 42px; height: 42px;
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  background: none; border: 1px solid var(--line); border-radius: 3px;
+  cursor: pointer;
+}
+.menu-toggle span { display: block; width: 16px; height: 1px; background: var(--ink); transition: transform .35s var(--ease); }
+.menu-toggle.active span:nth-child(1) { transform: translateY(3px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); }
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .65rem;
+  padding: .95rem 2.1rem;
+  font-family: var(--sans);
+  font-size: .78rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; border-radius: 2px;
+  transition: all .4s var(--ease);
+}
+.btn svg { flex: 0 0 auto; }
+.btn-dark { background: var(--ink); color: var(--bg); }
+.btn-dark:hover { background: #000; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.btn-quiet { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-quiet:hover { background: var(--white); border-color: var(--faint); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 
 /* ===== Hero ===== */
 .hero {
-  min-height: 100vh; display: flex; align-items: center;
-  padding-top: 5rem;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: calc(var(--nav-h) + 5rem) 0 5.5rem;
 }
-.hero .container {
+.hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 44%);
-  gap: 4rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  gap: 6rem;
   align-items: center;
 }
-.hero-content { max-width: 640px; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.25);
-  border-radius: 9999px;
-  font-size: 0.85rem; font-weight: 500;
-  color: #93c5fd;
-  margin-bottom: 1.5rem;
-  animation: fadeInUp 0.6s ease;
+.hero-copy { max-width: 40rem; }
+.hero-copy .eyebrow { margin-bottom: 2rem; animation: rise .9s var(--ease) both; }
+.hero h1 { margin-bottom: 2rem; animation: rise .9s .06s var(--ease) both; }
+.hero h1 .line-2 { color: var(--gold); display: inline-block; min-height: 1.2em; }
+.hero .lede {
+  font-size: 1.02rem; max-width: 33rem;
+  margin-bottom: 3rem;
+  animation: rise .9s .12s var(--ease) both;
 }
-.hero-badge-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #22d3ee;
-  box-shadow: 0 0 12px rgba(34,211,238,0.6);
-  animation: pulse-dot 2s infinite;
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: rise .9s .18s var(--ease) both; }
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 1.6rem;
+  margin-top: 3.4rem; padding-top: 1.8rem;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  animation: rise .9s .24s var(--ease) both;
 }
-.hero h1 { margin-bottom: 1.5rem; line-height: 1.15; animation: fadeInUp 0.6s 0.1s ease both; }
-.hero-subtitle {
-  font-size: 1.15rem; color: #94a3b8; margin-bottom: 2.5rem;
-  line-height: 1.8; max-width: 520px;
-  animation: fadeInUp 0.6s 0.2s ease both;
-}
-.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeInUp 0.6s 0.3s ease both; }
-.btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.85rem 2rem; border-radius: 12px;
-  font-size: 1rem; font-weight: 600; text-decoration: none;
-  cursor: pointer; transition: all 0.3s ease;
-  border: none; position: relative; overflow: hidden;
-}
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(59,130,246,0.3);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(59,130,246,0.45);
-}
-.btn-primary:active { transform: translateY(0); }
-.btn-glass {
-  background: rgba(255,255,255,0.05);
-  color: #e2e8f0;
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.btn-glass:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-2px);
+.hero-meta li {
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--faint);
 }
 
-/* ===== Hero App Window (screenshot) ===== */
-.hero-visual {
+.cursor {
+  display: inline-block; width: 2px; height: .82em;
+  margin-left: .1em; vertical-align: -.06em;
+  background: var(--gold); animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Hero figure — matted print treatment */
+.hero-figure {
+  position: relative; justify-self: end;
+  width: 100%; max-width: 380px;
+  margin: 0;
+  animation: rise 1s .2s var(--ease) both;
+}
+.figure-plate {
+  position: absolute; z-index: 0;
+  top: 22px; left: 22px; right: -22px; bottom: -22px;
+  border: 1px solid var(--line); border-radius: 3px;
+}
+.shot {
+  position: relative; z-index: 1;
+  padding: 9px;
+  background: var(--white);
+  border: 1px solid var(--line); border-radius: 3px;
+  box-shadow: var(--shadow-lg);
+}
+/* Screenshots carry a 1–2px dark window frame baked in by the capture script;
+   clip it away so the mat stays clean. */
+.shot img { display: block; width: 100%; height: auto; border-radius: 2px; clip-path: inset(4px); }
+.hero-figure figcaption {
+  margin-top: 1.4rem; text-align: center;
+  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ===== Section header ===== */
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
+  gap: 3rem; align-items: end;
+  padding-bottom: 2.6rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4rem;
+}
+.section-head .eyebrow { margin-bottom: 1.4rem; }
+.section-head .section-note { color: var(--muted); font-weight: 300; font-size: .95rem; line-height: 1.9; }
+
+/* ===== Features ===== */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+.feature {
   position: relative;
-  width: 100%; max-width: 520px; justify-self: end;
-  pointer-events: none;
-  animation: fadeInUp 0.8s 0.25s ease both;
+  padding: 2.75rem 2.25rem 2.4rem;
+  background: var(--white);
+  border: 1px solid var(--line); border-radius: 3px;
+  transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease);
 }
-.app-window {
-  border-radius: 18px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 40px 90px rgba(0,0,0,0.55), 0 0 80px rgba(59,130,246,0.12);
-  background: #0b1220;
-  animation: appFloat 7s ease-in-out infinite;
+.feature:hover { transform: translateY(-5px); border-color: #d8d2c6; box-shadow: var(--shadow-md); }
+.feature-index {
+  position: absolute; top: 2rem; right: 2.25rem;
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 300;
+  color: var(--line); letter-spacing: .05em;
+  transition: color .55s var(--ease);
 }
-.app-window-bar {
-  display: flex; align-items: center; gap: 0.5rem;
-  padding: 0.8rem 1rem;
-  background: rgba(255,255,255,0.04);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-.app-window-dot { width: 11px; height: 11px; border-radius: 50%; }
-.app-window-dot.r { background: #f87171; }
-.app-window-dot.y { background: #fbbf24; }
-.app-window-dot.g { background: #34d399; }
-.app-window-title {
-  margin-left: 0.6rem; font-size: 0.8rem; color: #94a3b8; font-weight: 500;
-}
-.app-window img { display: block; width: 100%; height: auto; }
-.hero-orb {
-  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
-}
-.hero-orb-1 { width: 420px; height: 420px; background: #3b82f6; top: -60px; right: -80px; animation: orbFloat 8s ease-in-out infinite; z-index: -1; }
-.hero-orb-2 { width: 320px; height: 320px; background: #8b5cf6; bottom: -40px; left: -80px; animation: orbFloat 10s ease-in-out 1s infinite; z-index: -1; }
-
-/* ===== Sections ===== */
-.features-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-.feature-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 20px; padding: 2.5rem 2rem;
-  transition: all 0.4s ease;
-  position: relative; overflow: hidden;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.feature-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  opacity: 0; transition: opacity 0.4s;
-}
-.feature-card:hover::before { opacity: 1; }
-.feature-card:hover {
-  transform: translateY(-8px);
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.12);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(59,130,246,0.05);
-}
+.feature:hover .feature-index { color: var(--gold-soft); }
 .feature-icon {
-  width: 56px; height: 56px; border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1.5rem; font-size: 1.5rem;
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.2);
+  width: 46px; height: 46px; margin-bottom: 1.9rem;
+  display: grid; place-items: center;
+  border: 1px solid var(--line); border-radius: 50%;
+  color: var(--ink-soft);
+  transition: color .55s var(--ease), border-color .55s var(--ease);
 }
-.feature-card:nth-child(1) .feature-icon { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.2); }
-.feature-card:nth-child(2) .feature-icon { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.2); }
-.feature-card:nth-child(3) .feature-icon { background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.2); }
+.feature:hover .feature-icon { color: var(--gold); border-color: var(--gold-soft); }
+.feature h3 { margin-bottom: .9rem; }
+.feature p { color: var(--muted); font-weight: 300; font-size: .92rem; line-height: 1.9; }
 
-.feature-card h3 { margin-bottom: 0.75rem; color: #f1f5f9; }
-.feature-card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.7; }
-
-.section-header { text-align: center; margin-bottom: 4rem; }
-.section-header h2 { margin-bottom: 1rem; }
-.section-header p { color: #94a3b8; font-size: 1.1rem; max-width: 560px; margin: 0 auto; }
-
-/* ===== UI Preview (screenshot gallery) ===== */
-.preview-gallery { max-width: 680px; margin: 0 auto; }
-.shot-frame {
-  border-radius: 16px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: #0b1220;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
-}
-.shot-frame img {
-  display: block; width: 100%; height: auto;
-  opacity: 0; transform: translateY(14px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
-}
-.shot-frame img.active { opacity: 1; transform: translateY(0); }
+/* ===== Preview gallery ===== */
+.preview-wrap { max-width: 540px; margin: 0 auto; text-align: center; }
 .preview-tabs {
-  display: inline-flex; gap: 0.4rem; margin-bottom: 1.5rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 9999px; padding: 0.35rem;
-  flex-wrap: wrap;
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--line);
 }
 .preview-tab {
-  padding: 0.45rem 1.1rem; border-radius: 9999px;
-  font-size: 0.85rem; font-weight: 500; cursor: pointer;
-  color: #94a3b8; border: none; background: transparent;
-  transition: all 0.25s ease;
+  position: relative;
+  padding: .55rem 0 1rem;
+  background: none; border: 0; cursor: pointer;
+  font-family: var(--sans); font-size: .76rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--faint);
+  transition: color .35s var(--ease);
 }
-.preview-tab:hover { color: #e2e8f0; }
-.preview-tab.active {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: #fff; font-weight: 600;
-  box-shadow: 0 4px 18px rgba(59,130,246,0.35);
+.preview-tab::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 1px; background: var(--ink);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform .45s var(--ease);
 }
-.preview-caption { margin-top: 1rem; color: #64748b; font-size: 0.9rem; min-height: 1.6em; text-align: center; }
-
-@keyframes appFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+.preview-tab:hover { color: var(--ink-soft); }
+.preview-tab.active { color: var(--ink); }
+.preview-tab.active::after { transform: scaleX(1); }
+.preview-caption {
+  margin-top: 1.4rem; min-height: 1.8em;
+  font-family: var(--serif); font-size: 1.02rem; color: var(--ink-soft);
+  letter-spacing: .02em;
 }
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
-}
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 12px rgba(34,211,238,0.6); }
-  50% { box-shadow: 0 0 24px rgba(34,211,238,1); }
-}
+.preview-note { margin-top: 1.5rem; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.preview-wrap .shot img { opacity: 0; transform: translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.preview-wrap .shot img.active { opacity: 1; transform: none; }
 
 /* ===== Steps ===== */
-.steps { display: flex; gap: 1.5rem; position: relative; }
-.steps::before {
-  content: ''; position: absolute; top: 40px; left: 60px; right: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(59,130,246,0.4), rgba(139,92,246,0.4), rgba(34,211,238,0.4));
-  z-index: 0;
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5rem; }
+.step { padding-top: 2.2rem; border-top: 1px solid var(--line); }
+.step-num {
+  display: block; margin-bottom: 1.5rem;
+  font-family: var(--serif); font-size: 2.5rem; font-weight: 300; line-height: 1;
+  color: var(--gold); letter-spacing: .04em;
 }
-.step-card {
-  flex: 1; text-align: center; position: relative; z-index: 1;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 20px; padding: 2.5rem 1.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
-}
-.step-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.12); }
-.step-number {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: #fff; font-weight: 800; font-size: 1.2rem;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.25rem;
-  box-shadow: 0 8px 25px rgba(59,130,246,0.35);
-}
-.step-card:nth-child(2) .step-number { background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 8px 25px rgba(139,92,246,0.35); }
-.step-card:nth-child(3) .step-number { background: linear-gradient(135deg, #22d3ee, #3b82f6); box-shadow: 0 8px 25px rgba(34,211,238,0.35); }
-.step-card h3 { margin-bottom: 0.5rem; }
-.step-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
+.step h3 { margin-bottom: .85rem; }
+.step p { color: var(--muted); font-weight: 300; font-size: .92rem; line-height: 1.9; }
 
-/* ===== Download CTA ===== */
-.download-section { text-align: center; }
-.download-card {
-  display: inline-block; text-align: center;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 24px; padding: 4rem 3rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+/* ===== FAQ ===== */
+.faq-list { max-width: 880px; border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item summary {
+  position: relative; list-style: none; cursor: pointer;
+  padding: 1.75rem 3.5rem 1.75rem 0;
+  font-family: var(--serif); font-size: 1.12rem; font-weight: 500;
+  letter-spacing: .02em; color: var(--ink);
+  transition: color .3s var(--ease);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: ''; position: absolute; right: .5rem; top: 50%;
+  width: 9px; height: 9px; margin-top: -6px;
+  border-right: 1px solid var(--faint); border-bottom: 1px solid var(--faint);
+  transform: rotate(45deg);
+  transition: transform .4s var(--ease), border-color .3s var(--ease);
+}
+.faq-item summary:hover { color: var(--gold); }
+.faq-item[open] summary::after { transform: rotate(-135deg); margin-top: -2px; border-color: var(--gold); }
+.faq-body { padding: 0 3.5rem 1.9rem 0; color: var(--muted); font-weight: 300; font-size: .93rem; line-height: 1.95; }
+.faq-body b { font-weight: 500; color: var(--ink-soft); }
+.faq-item[open] .faq-body { animation: fadeIn .45s var(--ease) both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+
+/* ===== Download ===== */
+.cta-panel {
   position: relative; overflow: hidden;
-  max-width: 620px; width: 100%;
+  padding: 5.5rem 3rem;
+  background: linear-gradient(180deg, #f8f5ef 0%, #f1ece2 100%);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
 }
-.download-card::before {
-  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle at center, rgba(59,130,246,0.06), transparent 60%);
-  pointer-events: none;
+.cta-panel::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(88% 70% at 50% 0%, rgba(154,123,79,.11), transparent 66%);
 }
-.download-card h2 { margin-bottom: 1rem; }
-.download-card p { color: #94a3b8; margin-bottom: 2rem; }
-.download-info { margin-top: 1.5rem; color: #64748b; font-size: 0.85rem; }
-.download-meta {
-  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
-  margin-top: 1.75rem; color: #94a3b8; font-size: 0.85rem;
+.cta-inner { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; }
+.cta-panel .eyebrow { justify-content: center; }
+.cta-panel h2 { margin: 1.5rem 0 1.4rem; }
+.cta-panel p { color: var(--muted); font-weight: 300; line-height: 1.9; }
+.cta-panel .btn { margin-top: 2.6rem; }
+.cta-meta {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 2.4rem;
+  margin-top: 2.4rem; padding-top: 2.2rem;
+  border-top: 1px solid var(--line);
 }
-.download-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.cta-meta span {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--faint);
+}
+.cta-meta svg { color: var(--gold); flex: 0 0 auto; }
+.cta-foot { margin-top: 2rem; font-size: .76rem; letter-spacing: .06em; color: var(--faint); }
+.cta-foot a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); transition: color .3s var(--ease), border-color .3s var(--ease); }
+.cta-foot a:hover { color: var(--ink); border-color: var(--faint); }
 
 /* ===== Footer ===== */
-footer {
-  border-top: 1px solid rgba(255,255,255,0.06);
-  padding: 3rem 2rem;
-}
+footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relative; z-index: 1; }
 .footer-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem;
+  max-width: 1180px; margin: 0 auto; padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.25rem;
 }
-.footer-text { color: #64748b; font-size: 0.85rem; }
-.footer-links { display: flex; gap: 1.5rem; }
-.footer-links a { color: #64748b; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-.footer-links a:hover { color: #94a3b8; }
+.footer-text { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a {
+  font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--faint); text-decoration: none;
+  transition: color .3s var(--ease);
+}
+.footer-links a:hover { color: var(--ink); }
 
-/* ===== Glass divider ===== */
-.glass-divider {
-  width: 100%; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-  margin: 0 auto; max-width: 1200px;
+/* ===== Motion ===== */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
 }
-
-/* ===== Animations ===== */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.reveal {
-  opacity: 0; transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.visible { opacity: 1; transform: none; }
+.features-grid .reveal:nth-child(2),
+.steps .reveal:nth-child(2) { transition-delay: .1s; }
+.features-grid .reveal:nth-child(3),
+.steps .reveal:nth-child(3) { transition-delay: .2s; }
+.faq-list .reveal:nth-child(2) { transition-delay: .06s; }
+.faq-list .reveal:nth-child(3) { transition-delay: .12s; }
+.faq-list .reveal:nth-child(4) { transition-delay: .18s; }
 
 /* ===== Responsive ===== */
 @media (max-width: 1080px) {
-  .hero { min-height: auto; padding-top: 7rem; padding-bottom: 3rem; }
-  .hero .container { grid-template-columns: 1fr; gap: 3rem; }
-  .hero-visual { justify-self: center; max-width: 460px; }
+  .hero { min-height: auto; padding: calc(var(--nav-h) + 4.5rem) 0 5rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 4.5rem; }
+  .hero-copy { max-width: 34rem; }
+  .hero-figure { justify-self: start; max-width: 340px; }
+  .section-head { grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
 }
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
+  .site-nav { height: 68px; }
+  .nav-links { display: none; }
+  .menu-toggle { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column; align-items: stretch;
+    gap: 0;
+    position: absolute; left: 0; right: 0; top: calc(100% + 14px);
+    padding: 1rem 1.6rem 1.4rem;
+    background: var(--white);
+    border: 1px solid var(--line); border-radius: 3px;
+    box-shadow: var(--shadow-md);
+  }
+  .nav-links.open a { padding: .85rem 0; font-size: .86rem; letter-spacing: .08em; border-bottom: 1px solid var(--line-soft); }
+  .nav-links.open a::after { display: none; }
+  .nav-links.open .nav-cta { margin-top: 1.1rem; border-bottom: 0; text-align: center; }
+  .container, .footer-inner { padding: 0 1.5rem; }
+  .nav-inner { padding: 0 1.5rem; }
+}
+@media (max-width: 900px) and (min-width: 769px) {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
-  .steps { flex-wrap: wrap; }
-  .steps::before { display: none; }
-  .step-card { flex: 1 1 calc(50% - 0.75rem); }
+  .steps { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
 }
 @media (max-width: 768px) {
-  section { padding: 4rem 0; }
-  .container { padding: 0 1.25rem; }
-  .nav-links { display: none; }
-  .menu-toggle { display: block; }
-  .features-grid { grid-template-columns: 1fr; }
-  .step-card { flex: 1 1 100%; }
-  .download-card { padding: 2.5rem 1.5rem; }
+  section { padding: 5rem 0; }
+  .features-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .steps { grid-template-columns: 1fr; gap: 2.5rem; }
+  .figure-plate { display: none; }
+  .hero-figure { max-width: 320px; }
+  .section-head { margin-bottom: 3rem; }
+  .cta-panel { padding: 3.5rem 1.6rem; }
+  .cta-meta { gap: 1.2rem 1.8rem; }
+  .faq-body { padding-right: 1rem; }
   .footer-inner { flex-direction: column; text-align: center; }
 }
 @media (max-width: 480px) {
-  h1 { font-size: 2rem; }
-  .hero-buttons { flex-direction: column; }
-  .btn { justify-content: center; }
+  .container, .footer-inner, .nav-inner { padding: 0 1.2rem; }
+  .brand-text em { display: none; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; }
+  .preview-tabs { gap: 1.3rem; }
+  .feature { padding: 2.25rem 1.6rem 2rem; }
+  .feature-index { top: 1.7rem; right: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- Particle Canvas -->
-<canvas id="particles"></canvas>
+<a class="skip-link" href="#main">跳至主要内容</a>
 
 <!-- Navigation -->
-<nav id="navbar">
+<header class="site-nav" id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <img src="assets/logo.png" alt="SCUTNetLogin">
-      <span>SCUTNetLogin</span>
+    <a href="#top" class="brand">
+      <span class="brand-mark"><img src="assets/logo.png" alt="SCUTNetLogin 标志"></span>
+      <span class="brand-text">
+        <strong>SCUTNetLogin</strong>
+        <em>校园网认证客户端</em>
+      </span>
     </a>
-    <div class="nav-links">
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
       <a href="#features">功能特性</a>
       <a href="#preview">界面展示</a>
       <a href="#how-it-works">使用流程</a>
       <a href="#faq">常见问题</a>
       <a href="#download" class="nav-cta">立即下载</a>
-    </div>
-    <button class="menu-toggle" aria-label="菜单">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="展开菜单" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
     </button>
   </div>
-</nav>
+</header>
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        华南理工大学 · 学生校园网认证客户端
-      </div>
-      <h1>
-        连接校园网，<br>
-        <span class="gradient-text-cyan" id="typing-text"></span><span class="typing-cursor">|</span>
-      </h1>
-      <p class="hero-subtitle">
-        SCUTNetLogin 是专为华南理工大学设计的校园网认证客户端：有线 802.1X
-        与无线 Web Portal 双模认证。一键连接，断线自动重连，登录过程安静地在后台完成。
-      </p>
-      <div class="hero-buttons">
-        <a href="#download" class="btn btn-primary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          立即下载
-        </a>
-        <a href="#preview" class="btn btn-glass">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          查看界面
-        </a>
-      </div>
-    </div>
+<main id="main">
 
-    <div class="hero-visual">
-      <div class="hero-orb hero-orb-1"></div>
-      <div class="hero-orb hero-orb-2"></div>
-      <div class="app-window">
-        <div class="app-window-bar">
-          <span class="app-window-dot r"></span>
-          <span class="app-window-dot y"></span>
-          <span class="app-window-dot g"></span>
-          <span class="app-window-title">华南理工大学·学生校园网认证客户端</span>
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">华南理工大学 · 学生校园网认证</p>
+        <h1>
+          连接校园网<br>
+          <span class="line-2"><span id="typing-text"></span><span class="cursor" aria-hidden="true"></span></span>
+        </h1>
+        <p class="lede">
+          SCUTNetLogin 是专为华南理工大学设计的校园网认证客户端：有线 802.1X
+          与无线 Web Portal 双模认证。一键连接，断线自动重连，登录过程安静地在后台完成。
+        </p>
+        <div class="hero-actions">
+          <a href="#download" class="btn btn-dark">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            立即下载
+          </a>
+          <a href="#preview" class="btn btn-quiet">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+            查看界面
+          </a>
         </div>
-        <img src="assets/shot_connected.png" alt="SCUTNetLogin 已连接界面">
+        <ul class="hero-meta">
+          <li>Windows 10 / 11 x64</li>
+          <li>开源 · MIT License</li>
+          <li>免配置安装</li>
+        </ul>
       </div>
-    </div>
-  </div>
-</section>
 
-<div class="glass-divider"></div>
-
-<!-- Features Section -->
-<section id="features">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2><span class="gradient-text">功能丰富</span>，稳定连接</h2>
-      <p>有线 802.1X 与无线 Web Portal，从认证到重连，一切在后台安静完成</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+      <figure class="hero-figure">
+        <span class="figure-plate" aria-hidden="true"></span>
+        <div class="shot">
+          <img src="assets/shot_connected.png" alt="SCUTNetLogin 已连接界面">
         </div>
-        <h3>有线 + 无线双模</h3>
-        <p>网线插入走 802.1X；未插网线且命中白名单 Wi-Fi 时走 Dr.COM Web Portal，自动识别门户、模拟浏览器登录并按官方接口确认上线——无需手动选择方式。</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <figcaption>已连接 · 无线模式</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <header class="section-head reveal">
+        <div>
+          <p class="eyebrow">01 — 功能特性</p>
+          <h2>双模认证，<span class="accent">安静稳定</span></h2>
         </div>
-        <h3>断线自动恢复</h3>
-        <p>被服务器踢下线自动重连；凌晨 0:00–6:00 强制下线后等待 6:00 自动恢复。</p>
+        <p class="section-note">有线 802.1X 与无线 Web Portal，从认证到重连，一切都在后台安静完成。</p>
+      </header>
+
+      <div class="features-grid">
+        <article class="feature reveal">
+          <span class="feature-index" aria-hidden="true">01</span>
+          <div class="feature-icon">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>有线 + 无线双模</h3>
+          <p>网线插入走 802.1X；未插网线且命中白名单 Wi-Fi 时走 Dr.COM Web Portal，自动识别门户、模拟浏览器登录并按官方接口确认上线——无需手动选择方式。</p>
+        </article>
+
+        <article class="feature reveal">
+          <span class="feature-index" aria-hidden="true">02</span>
+          <div class="feature-icon">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>断线自动恢复</h3>
+          <p>被服务器踢下线自动重连；凌晨 0:00–6:00 强制下线后，静候至 6:00 自动恢复，无需任何手动操作。</p>
+        </article>
+
+        <article class="feature reveal">
+          <span class="feature-index" aria-hidden="true">03</span>
+          <div class="feature-icon">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3>后台安静陪伴</h3>
+          <p>支持 Windows 计划任务开机自启，静默模式（--silent）下自动连接；托盘常驻；静态 IP 自动配置，断开时恢复 DHCP。</p>
+        </article>
       </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    </div>
+  </section>
+
+  <!-- Preview -->
+  <section id="preview" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="container">
+      <header class="section-head reveal">
+        <div>
+          <p class="eyebrow">02 — 界面展示</p>
+          <h2>界面<span class="accent">一目了然</span></h2>
         </div>
-        <h3>后台安静陪伴</h3>
-        <p>支持 Windows 计划任务开机自启，静默模式（--silent）下自动连接；托盘常驻；静态 IP 自动配置、断开恢复 DHCP。</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <p class="section-note">连接、认证、断连状态与当前连接模式实时可见；账号密码直接输入，回车即连接。</p>
+      </header>
 
-<div class="glass-divider"></div>
-
-<!-- UI Preview Section -->
-<section id="preview">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2>界面<span class="gradient-text-cyan">一目了然</span></h2>
-      <p>连接、认证、断连状态与当前连接模式实时可见；账号密码直接输入，回车即连接</p>
-    </div>
-    <div class="preview-gallery reveal">
-      <div class="preview-tabs" id="previewTabs">
-        <button class="preview-tab active" data-idx="0">未连接</button>
-        <button class="preview-tab" data-idx="1">认证中</button>
-        <button class="preview-tab" data-idx="2">已连接</button>
-        <button class="preview-tab" data-idx="3">设置</button>
-      </div>
-      <div class="shot-frame">
-        <img id="shotImg" src="assets/shot_disconnected.png" alt="SCUTNetLogin 界面截图">
-      </div>
-      <p class="preview-caption" id="previewCaption">未连接 · 点击下方按钮开始认证</p>
-      <p style="margin-top:1.2rem;color:#475569;font-size:0.8rem;text-align:center;">截图可能随版本更新，以实际程序界面为准。</p>
-    </div>
-  </div>
-</section>
-
-<div class="glass-divider"></div>
-
-<!-- How it Works -->
-<section id="how-it-works">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2><span class="gradient-text">几步</span>即可上网</h2>
-      <p>无需切换方式——插入网线走有线，未插网线且连接校园 Wi-Fi 时自动走无线</p>
-    </div>
-    <div class="steps">
-      <div class="step-card reveal">
-        <div class="step-number">1</div>
-        <h3>填写账号</h3>
-        <p>输入学号与密码（可记住密码），有线网卡参数自动检测，静态 IP/DNS 可选配置</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-number">2</div>
-        <h3>点击连接</h3>
-        <p>点「连接」或直接回车。自动按"有线优先、无线兜底"发起认证，全程后台完成</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-number">3</div>
-        <h3>安心使用</h3>
-        <p>最小化到托盘，开机静默启动自动连接；被踢下线自动重连，夜间断网晨间自动恢复</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="glass-divider"></div>
-
-<div class="glass-divider"></div>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2><span class="gradient-text-cyan">常见问题</span></h2>
-      <p>使用前需要了解的几点</p>
-    </div>
-    <div class="steps" style="display:block;max-width:760px;margin:0 auto;">
-      <div class="step-card reveal" style="margin-bottom:1rem;text-align:left;">
-        <h3>需要管理员权限吗？</h3>
-        <p>需要。发送原始 802.1X 以太网帧与修改网卡配置都需要管理员权限，程序启动时会自动请求提权。</p>
-      </div>
-      <div class="step-card reveal" style="margin-bottom:1rem;text-align:left;">
-        <h3>必须安装 Npcap 吗？</h3>
-        <p>是的（有线认证与程序启动都依赖）。安装 Npcap 时请勾选 <b>“Support raw 802.1X traffic”</b>；WinPcap 不支持。</p>
-      </div>
-      <div class="step-card reveal" style="margin-bottom:1rem;text-align:left;">
-        <h3>夜间会断网吗？</h3>
-        <p>凌晨 0:00–6:00 校园网会统一强制下线（各校区可能不同）。程序会等待到 6:00 自动重连，无需手动操作。</p>
-      </div>
-      <div class="step-card reveal" style="text-align:left;">
-        <h3>无线认证和有线有区别吗？</h3>
-        <p>无线走 Web Portal（模拟浏览器登录、按官方接口确认上线），有线走 802.1X + DrCOM UDP 心跳。两者自动切换：插网线走有线，未插网线且连接的 Wi-Fi 在白名单内则走无线。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="glass-divider"></div>
-
-<!-- Download -->
-<section id="download">
-  <div class="container">
-    <div class="download-section">
-      <div class="download-card reveal">
-        <h2><span class="gradient-text-cyan">准备好连接了吗？</span></h2>
-        <p>免费、开源，专为华工校园网打造。<br>支持 Windows 10 / 11 x64，有线与校园 Wi-Fi 通用。</p>
-        <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/releases" class="btn btn-primary" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          前往 GitHub Releases 下载
-        </a>
-        <div class="download-meta">
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>自包含安装包，免配置环境</span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>需管理员权限；有线认证依赖 Npcap</span>
+      <div class="preview-wrap reveal">
+        <div class="preview-tabs" id="previewTabs" role="tablist" aria-label="界面截图切换">
+          <button class="preview-tab active" type="button" data-idx="0" role="tab" aria-selected="true">未连接</button>
+          <button class="preview-tab" type="button" data-idx="1" role="tab" aria-selected="false">认证中</button>
+          <button class="preview-tab" type="button" data-idx="2" role="tab" aria-selected="false">已连接</button>
+          <button class="preview-tab" type="button" data-idx="3" role="tab" aria-selected="false">设置</button>
         </div>
-        <p class="download-info">或访问 GitHub 仓库查看源码与安装说明</p>
+        <div class="shot">
+          <img id="shotImg" src="assets/shot_disconnected.png" alt="SCUTNetLogin 界面截图">
+        </div>
+        <p class="preview-caption" id="previewCaption">未连接 · 点击下方按钮开始认证</p>
+        <p class="preview-note">截图可能随版本更新，以实际程序界面为准</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works">
+    <div class="container">
+      <header class="section-head reveal">
+        <div>
+          <p class="eyebrow">03 — 使用流程</p>
+          <h2>几步，<span class="accent">即可上网</span></h2>
+        </div>
+        <p class="section-note">无需切换方式——插入网线走有线，未插网线且连接校园 Wi-Fi 时自动走无线。</p>
+      </header>
+
+      <div class="steps">
+        <article class="step reveal">
+          <span class="step-num" aria-hidden="true">01</span>
+          <h3>填写账号</h3>
+          <p>输入学号与密码（可记住密码）。有线网卡参数自动检测，静态 IP 与 DNS 可选配置。</p>
+        </article>
+        <article class="step reveal">
+          <span class="step-num" aria-hidden="true">02</span>
+          <h3>点击连接</h3>
+          <p>点「连接」或直接回车。自动按“有线优先、无线兜底”发起认证，全程在后台完成。</p>
+        </article>
+        <article class="step reveal">
+          <span class="step-num" aria-hidden="true">03</span>
+          <h3>安心使用</h3>
+          <p>最小化到托盘，开机静默启动自动连接；被踢下线自动重连，夜间断网晨间自动恢复。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="container">
+      <header class="section-head reveal">
+        <div>
+          <p class="eyebrow">04 — 常见问题</p>
+          <h2>使用前，<span class="accent">几点须知</span></h2>
+        </div>
+        <p class="section-note">关于权限、依赖与夜间断网的说明，都在这里。</p>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary>需要管理员权限吗？</summary>
+          <div class="faq-body">需要。发送原始 802.1X 以太网帧与修改网卡配置都需要管理员权限，程序启动时会自动请求提权。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>必须安装 Npcap 吗？</summary>
+          <div class="faq-body">是的（有线认证与程序启动都依赖）。安装 Npcap 时请勾选 <b>“Support raw 802.1X traffic”</b>；WinPcap 不受支持。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>夜间会断网吗？</summary>
+          <div class="faq-body">凌晨 0:00–6:00 校园网会统一强制下线（各校区可能不同）。程序会等待到 6:00 自动重连，无需手动操作。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>无线认证和有线有区别吗？</summary>
+          <div class="faq-body">无线走 Web Portal（模拟浏览器登录、按官方接口确认上线），有线走 802.1X + Dr.COM UDP 心跳。两者自动切换：插网线走有线，未插网线且连接的 Wi-Fi 在白名单内则走无线。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section id="download">
+    <div class="container">
+      <div class="cta-panel reveal">
+        <div class="cta-inner">
+          <p class="eyebrow">免费 · 开源</p>
+          <h2>准备好连接了吗</h2>
+          <p>专为华工校园网打造，支持 Windows 10 / 11 x64，有线与校园 Wi-Fi 通用。</p>
+          <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/releases" class="btn btn-dark" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            前往 GitHub Releases
+          </a>
+          <div class="cta-meta">
+            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>自包含安装包，免配置环境</span>
+            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>需管理员权限，有线认证依赖 Npcap</span>
+          </div>
+          <p class="cta-foot">或访问 <a href="https://github.com/YiZhiQvQ/SCUTNetLogin" target="_blank" rel="noopener">GitHub 仓库</a> 查看源码与安装说明</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <!-- Footer -->
 <footer>
   <div class="footer-inner">
-    <p class="footer-text">&copy; 2026 SCUTNetLogin. Open source under MIT License.</p>
+    <p class="footer-text">&copy; 2026 SCUTNetLogin · MIT License</p>
     <div class="footer-links">
       <a href="https://github.com/YiZhiQvQ/SCUTNetLogin" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/YiZhiQvQ/SCUTNetLogin/issues" target="_blank" rel="noopener">反馈问题</a>
@@ -647,253 +738,152 @@ footer {
 </footer>
 
 <script>
-/* ===== Typing Animation ===== */
-(function() {
-  const el = document.getElementById('typing-text');
-  const text = '从未如此简单';
-  let i = 0;
-  let deleting = false;
+/* ===== Typing animation ===== */
+(function () {
+  var el = document.getElementById('typing-text');
+  var text = '从未如此简单';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  if (reduce) { el.textContent = text; return; }
+
+  var i = 0, deleting = false;
   function tick() {
     if (!deleting) {
       i++;
       el.textContent = text.slice(0, i);
-      if (i === text.length) {
-        setTimeout(() => { deleting = true; tick(); }, 1500);
-        return;
-      }
-      setTimeout(tick, 120);
+      if (i === text.length) { setTimeout(function () { deleting = true; tick(); }, 2200); return; }
+      setTimeout(tick, 170);
     } else {
       i--;
       el.textContent = text.slice(0, i);
-      if (i === 0) {
-        setTimeout(() => { deleting = false; tick(); }, 400);
-        return;
-      }
-      setTimeout(tick, 60);
+      if (i === 0) { setTimeout(function () { deleting = false; tick(); }, 600); return; }
+      setTimeout(tick, 80);
     }
   }
-
-  setTimeout(tick, 500);
+  setTimeout(tick, 700);
 })();
 
-/* ===== UI Preview Gallery ===== */
-(function() {
-  const shots = [
+/* ===== Preview gallery ===== */
+(function () {
+  var shots = [
     { src: 'assets/shot_disconnected.png', caption: '未连接 · 点击下方按钮开始认证' },
-    { src: 'assets/shot_connecting.png',  caption: '认证中 · 状态指示器旋转，日志实时显示进度' },
-    { src: 'assets/shot_connected.png',   caption: '已连接 · 绿色对勾 + 当前连接模式（有线/无线）' },
-    { src: 'assets/shot_settings.png',    caption: '设置 · 有线网络配置（网卡 / 静态 IP / 认证服务器）' }
+    { src: 'assets/shot_connecting.png',   caption: '认证中 · 状态指示器旋转，日志实时显示进度' },
+    { src: 'assets/shot_connected.png',    caption: '已连接 · 绿色对勾与当前连接模式' },
+    { src: 'assets/shot_settings.png',     caption: '设置 · 有线网络配置（网卡 / 静态 IP / 认证服务器）' }
   ];
-  const img = document.getElementById('shotImg');
-  const caption = document.getElementById('previewCaption');
-  const tabs = Array.from(document.querySelectorAll('.preview-tab'));
-  let current = 0;
-  let timer = null;
+  var img = document.getElementById('shotImg');
+  var caption = document.getElementById('previewCaption');
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.preview-tab'));
+  var current = 0, timer = null;
 
   function show(idx) {
     current = idx;
-    tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+    tabs.forEach(function (t, i) {
+      t.classList.toggle('active', i === idx);
+      t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+    });
     img.classList.remove('active');
-    setTimeout(() => {
+    setTimeout(function () {
       img.src = shots[idx].src;
       img.alt = shots[idx].caption;
       img.classList.add('active');
-    }, 180);
+    }, 160);
     caption.textContent = shots[idx].caption;
   }
-
+  function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
   function startAuto() {
     stopAuto();
-    timer = setInterval(() => show((current + 1) % shots.length), 4200);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(function () { show((current + 1) % shots.length); }, 4600);
   }
-  function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
 
-  tabs.forEach(t => t.addEventListener('click', () => {
-    stopAuto();
-    show(parseInt(t.dataset.idx));
-    setTimeout(startAuto, 12000);
-  }));
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      stopAuto();
+      show(parseInt(t.dataset.idx, 10));
+      setTimeout(startAuto, 14000);
+    });
+  });
 
-  const gallery = document.querySelector('.preview-gallery');
-  gallery.addEventListener('mouseenter', stopAuto);
-  gallery.addEventListener('mouseleave', startAuto);
+  var wrap = document.querySelector('.preview-wrap');
+  wrap.addEventListener('mouseenter', stopAuto);
+  wrap.addEventListener('mouseleave', startAuto);
+
   show(0);
   startAuto();
 })();
 
-/* ===== Particle Network Animation ===== */
-(function() {
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let mouse = { x: null, y: null, radius: 120 };
-  const particleCount = 80;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  class Particle {
-    constructor() {
-      this.reset();
-      this.y = Math.random() * canvas.height;
-    }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.6;
-      this.vy = (Math.random() - 0.5) * 0.6;
-      this.radius = Math.random() * 2 + 1;
-      this.opacity = Math.random() * 0.5 + 0.1;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-      if (mouse.x != null) {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          this.x += (dx / dist) * force * 2;
-          this.y += (dy / dist) * force * 2;
-        }
-      }
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(96, 165, 250, ${this.opacity})`;
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-
-  function connect() {
-    const maxDist = 140;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          const opacity = (1 - dist / maxDist) * 0.15;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    connect();
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-
-  if (window.innerWidth > 768) {
-    window.addEventListener('mousemove', e => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-    window.addEventListener('mouseleave', () => {
-      mouse.x = null;
-      mouse.y = null;
-    });
-  }
+/* ===== Navbar scroll state ===== */
+(function () {
+  var nav = document.getElementById('navbar');
+  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
-
-/* ===== Navbar scroll effect ===== */
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-});
 
 /* ===== Scroll reveal ===== */
-const revealEls = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-revealEls.forEach(el => revealObserver.observe(el));
-
-/* ===== Mobile nav ===== */
-(function() {
-  const style = document.createElement('style');
-  style.textContent = `
-    @media (max-width: 768px) {
-      .nav-links.open {
-        display: flex !important;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 1rem; right: 1rem;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 16px;
-        padding: 1.5rem;
-        gap: 1rem;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('visible'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
-    }
-  `;
-  document.head.appendChild(style);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(function (el) { observer.observe(el); });
+})();
 
-  const toggle = document.querySelector('.menu-toggle');
-  const links = document.querySelector('.nav-links');
+/* ===== Mobile navigation ===== */
+(function () {
+  var toggle = document.getElementById('menuToggle');
+  var links = document.getElementById('navLinks');
 
-  toggle.addEventListener('click', (e) => {
+  function close() {
+    links.classList.remove('open');
+    toggle.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', function (e) {
     e.stopPropagation();
-    links.classList.toggle('open');
+    var open = links.classList.toggle('open');
+    toggle.classList.toggle('active', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => links.classList.remove('open'));
+  links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+
+  document.addEventListener('click', function (e) {
+    if (!links.contains(e.target) && !toggle.contains(e.target)) close();
   });
 
-  document.addEventListener('click', (e) => {
-    if (!links.contains(e.target) && !toggle.contains(e.target)) {
-      links.classList.remove('open');
-    }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
   });
 })();
 
-/* Smooth scroll offset for fixed nav */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      const offset = 80;
-      window.scrollTo({
-        top: target.offsetTop - offset,
-        behavior: 'smooth'
-      });
-    }
+/* ===== Smooth scroll with fixed-nav offset ===== */
+(function () {
+  var nav = document.getElementById('navbar');
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      var offset = nav.offsetHeight + 16;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
+      history.replaceState(null, '', href);
+    });
   });
-});
+})();
 </script>
 
 </body>
