@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a GitHub Pages user site (`YiZhiQvQ.github.io`) hosting a project hub and sub-pages for personal projects.
 
-- `index.html` — Root hub page listing all projects, using the shared light editorial ("简约轻奢") design system.
+- `index.html` — Root hub page: a single "作品索引" (project index) list with nav and footer, using the shared light editorial design system. No hero, no extra sections by design.
 - `scutnetlogin/index.html` — Landing page for **SCUTNetLogin**, a Qt 6.11 / C++17 Windows desktop application that handles campus network authentication (802.1X/EAPOL + DrCOM) for South China University of Technology (华南理工大学).
 
 The SCUTNetLogin application source code lives at `github.com/YiZhiQvQ/SCUTNetLogin`.
@@ -30,14 +30,14 @@ No build step, linting, or test suite. To preview, open HTML files directly in a
 ## Page architecture
 
 Both pages are single-file, Chinese (zh-CN), and share the same embedded JS systems, all IIFE-based:
-- **Typing animation** — Loops typing/deleting a phrase in `#typing-text` ("从未如此简单" on the SCUTNetLogin page, "问题解决好" on the hub). On the hub the phrase is also present in the HTML as a no-JS fallback and is cleared by the script before typing starts; both pages print the phrase directly when `prefers-reduced-motion` is set.
 - **Scroll reveal** — `IntersectionObserver` adds `.visible` to `.reveal` elements, triggering the CSS opacity/translate transition. Staggered `transition-delay` rules handle siblings.
 - **Navbar** — `scroll` event toggles `.scrolled` for the blurred translucent backdrop.
-- **Mobile nav** — Toggles `.nav-links.open` on hamburger click; closes on link click, outside click, or `Escape`.
-- **Smooth scroll** — `#` anchors use `preventDefault` + `scrollTo` with a fixed-nav offset.
+- **Typing animation** (SCUTNetLogin only) — Loops typing/deleting "从未如此简单" in `#typing-text`; prints the phrase directly under `prefers-reduced-motion`.
+- **Mobile nav** (SCUTNetLogin only) — Toggles `.nav-links.open` on hamburger click; closes on link click, outside click, or `Escape`. The hub nav has no hamburger: it is just the brand plus a GitHub CTA that stays visible at every width.
+- **Smooth scroll** (SCUTNetLogin only) — `#` anchors use `preventDefault` + `scrollTo` with a fixed-nav offset; the hub relies on CSS `scroll-behavior: smooth`.
 - **Preview gallery** (SCUTNetLogin only) — Tabs switch `assets/shot_*.png` with an auto-advance timer that pauses on hover.
 
-CSS uses no nesting, prefers `var(--token)` values, and sets breakpoints at 1080px / 900px / 768px / 480px, plus a `prefers-reduced-motion` block that disables animation and forces `.reveal` visible.
+CSS uses no nesting, prefers `var(--token)` values, and sets breakpoints at 1080px / 900px / 768px / 480px, plus a `prefers-reduced-motion` block that disables animation and forces `.reveal` visible. The hub additionally uses `body { display: flex; flex-direction: column }` with `main { flex: 1 }` so the footer stays at the bottom of that short page.
 
 ## Deployment
 

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YiZhiQvQ — 个人项目</title>
-<meta name="description" content="YiZhiQvQ 的个人项目主页：以南校园网认证客户端 SCUTNetLogin 为代表的若干开源作品。">
+<title>YiZhiQvQ — 作品索引</title>
+<meta name="description" content="YiZhiQvQ 的个人项目索引：以南校园网认证客户端 SCUTNetLogin 为代表的若干开源作品。">
 <meta name="theme-color" content="#fbfaf8">
 <link rel="icon" type="image/jpeg" href="/icon.jpg">
 <link rel="canonical" href="https://yizhiqvq.github.io/">
-<meta property="og:title" content="YiZhiQvQ — 个人项目">
+<meta property="og:title" content="YiZhiQvQ — 作品索引">
 <meta property="og:description" content="一些安静、好用、开源的个人项目。">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   YiZhiQvQ — Editorial Light-Luxury Theme
+   YiZhiQvQ — Editorial Light-Luxury Theme · 作品索引
    ============================================================ */
 :root {
   --bg:        #fbfaf8;
@@ -26,7 +26,6 @@
   --muted:     #787c84;
   --faint:     #a5a29b;
   --line:      #e5e1d9;
-  --line-soft: #eeebe4;
   --gold:      #9a7b4f;
   --gold-soft: #c9ae82;
   --white:     #ffffff;
@@ -51,12 +50,15 @@ body {
   line-height: 1.6;
   color: var(--ink);
   background: var(--bg);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 img { max-width: 100%; }
 a { color: inherit; }
+main { flex: 1 0 auto; }
 
 /* Warm ambient wash */
 body::after {
@@ -69,12 +71,7 @@ body::after {
 }
 
 /* ===== Typography ===== */
-h1, h2, h3 { font-family: var(--serif); font-weight: 400; color: var(--ink); }
-h1 {
-  font-size: clamp(2.55rem, 5.4vw, 4.15rem);
-  line-height: 1.16;
-  letter-spacing: .015em;
-}
+h2, h3 { font-family: var(--serif); font-weight: 400; color: var(--ink); }
 h2 {
   font-size: clamp(1.85rem, 3.4vw, 2.6rem);
   line-height: 1.3;
@@ -94,11 +91,11 @@ h3 { font-size: 1.18rem; font-weight: 500; letter-spacing: .02em; }
   content: ''; flex: 0 0 auto;
   width: 26px; height: 1px; background: var(--gold-soft);
 }
-.lede { color: var(--muted); font-weight: 300; line-height: 1.95; }
 
 /* ===== Layout ===== */
 .container { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 1; }
 section { padding: 7.5rem 0; position: relative; }
+main > section:first-child { padding-top: calc(var(--nav-h) + 5rem); }
 
 .skip-link {
   position: absolute; left: -9999px; top: 0; z-index: 2000;
@@ -124,9 +121,8 @@ section { padding: 7.5rem 0; position: relative; }
 .nav-inner {
   width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 2.5rem;
   display: flex; align-items: center; justify-content: space-between; gap: 2rem;
-  position: relative;
 }
-.brand { display: flex; align-items: center; gap: .85rem; text-decoration: none; }
+.brand { display: flex; align-items: center; gap: .85rem; }
 .brand-mark {
   width: 40px; height: 40px; flex: 0 0 auto;
   display: grid; place-items: center;
@@ -143,133 +139,15 @@ section { padding: 7.5rem 0; position: relative; }
   font-style: normal; font-size: .64rem; letter-spacing: .2em;
   color: var(--faint); text-transform: uppercase;
 }
-.nav-links { display: flex; align-items: center; gap: 2.4rem; }
-.nav-links a {
-  position: relative;
-  font-size: .82rem; font-weight: 400; letter-spacing: .12em;
-  color: var(--muted); text-decoration: none;
-  transition: color .3s var(--ease);
-  white-space: nowrap;
-}
-.nav-links a::after {
-  content: ''; position: absolute; left: 0; bottom: -7px;
-  width: 0; height: 1px; background: var(--gold);
-  transition: width .45s var(--ease);
-}
-.nav-links a:hover { color: var(--ink); }
-.nav-links a:hover::after { width: 100%; }
 .nav-cta {
   padding: .7rem 1.5rem;
-  background: var(--ink); color: var(--bg) !important;
-  font-size: .74rem !important; font-weight: 500 !important;
-  letter-spacing: .16em !important; text-transform: uppercase;
-  border-radius: 2px;
-  transition: background .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease) !important;
+  background: var(--ink); color: var(--bg);
+  font-size: .74rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  text-decoration: none; border-radius: 2px;
+  transition: background .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
 }
-.nav-cta::after { display: none !important; }
 .nav-cta:hover { background: #000; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
-
-.menu-toggle {
-  display: none;
-  width: 42px; height: 42px;
-  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-  background: none; border: 1px solid var(--line); border-radius: 3px;
-  cursor: pointer;
-}
-.menu-toggle span { display: block; width: 16px; height: 1px; background: var(--ink); transition: transform .35s var(--ease); }
-.menu-toggle.active span:nth-child(1) { transform: translateY(3px) rotate(45deg); }
-.menu-toggle.active span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); }
-
-/* ===== Buttons ===== */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: .65rem;
-  padding: .95rem 2.1rem;
-  font-family: var(--sans);
-  font-size: .78rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
-  text-decoration: none; cursor: pointer;
-  border: 1px solid transparent; border-radius: 2px;
-  transition: all .4s var(--ease);
-}
-.btn svg { flex: 0 0 auto; }
-.btn-dark { background: var(--ink); color: var(--bg); }
-.btn-dark:hover { background: #000; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.btn-quiet { background: transparent; color: var(--ink); border-color: var(--line); }
-.btn-quiet:hover { background: var(--white); border-color: var(--faint); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-
-/* ===== Hero ===== */
-.hero {
-  min-height: 92vh;
-  display: flex; align-items: center;
-  padding: calc(var(--nav-h) + 5rem) 0 5.5rem;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
-  gap: 6rem;
-  align-items: center;
-}
-.hero-copy { max-width: 40rem; }
-.hero-copy .eyebrow { margin-bottom: 2rem; animation: rise .9s var(--ease) both; }
-.hero h1 { margin-bottom: 2rem; animation: rise .9s .06s var(--ease) both; }
-.hero h1 .line-2 { color: var(--gold); display: inline-block; min-height: 1.2em; }
-.hero .lede {
-  font-size: 1.02rem; max-width: 33rem;
-  margin-bottom: 3rem;
-  animation: rise .9s .12s var(--ease) both;
-}
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: rise .9s .18s var(--ease) both; }
-.hero-meta {
-  display: flex; flex-wrap: wrap; gap: 1.6rem;
-  margin-top: 3.4rem; padding-top: 1.8rem;
-  border-top: 1px solid var(--line);
-  list-style: none;
-  animation: rise .9s .24s var(--ease) both;
-}
-.hero-meta li {
-  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--faint);
-}
-
-.cursor {
-  display: inline-block; width: 2px; height: .82em;
-  margin-left: .1em; vertical-align: -.06em;
-  background: var(--gold); animation: blink 1s step-end infinite;
-}
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-/* Hero plate — monogram print treatment */
-.hero-plate {
-  position: relative; justify-self: end;
-  width: 100%; max-width: 320px; aspect-ratio: 1 / 1;
-  animation: rise 1s .24s var(--ease) both;
-}
-.plate-frame {
-  position: absolute; z-index: 0;
-  top: 20px; left: 20px; right: -20px; bottom: -20px;
-  border: 1px solid var(--line); border-radius: 3px;
-}
-.plate-face {
-  position: relative; z-index: 1;
-  height: 100%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 1.2rem;
-  padding: 2rem;
-  background: var(--white);
-  border: 1px solid var(--line); border-radius: 3px;
-  box-shadow: var(--shadow-md);
-  text-align: center;
-}
-.plate-face .monogram {
-  display: block;
-  font-family: var(--serif); font-size: 4.6rem; font-weight: 400; line-height: 1;
-  color: var(--ink); letter-spacing: .02em;
-}
-.plate-face .monogram::first-letter { color: var(--gold); }
-.plate-rule { width: 34px; height: 1px; background: var(--gold-soft); }
-.plate-face p {
-  font-size: .66rem; letter-spacing: .24em; text-transform: uppercase;
-  color: var(--faint); line-height: 2;
-}
 
 /* ===== Section header ===== */
 .section-head {
@@ -332,37 +210,6 @@ section { padding: 7.5rem 0; position: relative; }
 }
 .project-row:hover .row-arrow { color: var(--gold); transform: translateX(3px); }
 
-/* ===== CTA panel ===== */
-.cta-panel {
-  position: relative; overflow: hidden;
-  padding: 5.5rem 3rem;
-  background: linear-gradient(180deg, #f8f5ef 0%, #f1ece2 100%);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-}
-.cta-panel::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(88% 70% at 50% 0%, rgba(154,123,79,.11), transparent 66%);
-}
-.cta-inner { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; }
-.cta-panel .eyebrow { justify-content: center; }
-.cta-panel h2 { margin: 1.5rem 0 1.4rem; }
-.cta-panel p { color: var(--muted); font-weight: 300; line-height: 1.9; }
-.cta-panel .btn { margin-top: 2.6rem; }
-.cta-meta {
-  display: flex; justify-content: center; flex-wrap: wrap; gap: 2.4rem;
-  margin-top: 2.4rem; padding-top: 2.2rem;
-  border-top: 1px solid var(--line);
-}
-.cta-meta span {
-  display: inline-flex; align-items: center; gap: .5rem;
-  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--faint);
-}
-.cta-meta svg { color: var(--gold); flex: 0 0 auto; }
-
 /* ===== Footer ===== */
 footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relative; z-index: 1; }
 .footer-inner {
@@ -380,62 +227,32 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
 .footer-links a:hover { color: var(--ink); }
 
 /* ===== Motion ===== */
-@keyframes rise {
-  from { opacity: 0; transform: translateY(22px); }
-  to { opacity: 1; transform: none; }
-}
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
-.projects-list .reveal:nth-child(2) { transition-delay: .1s; }
-.projects-list .reveal:nth-child(3) { transition-delay: .2s; }
-.projects-list .reveal:nth-child(4) { transition-delay: .3s; }
 
 /* ===== Responsive ===== */
 @media (max-width: 1080px) {
-  .hero { min-height: auto; padding: calc(var(--nav-h) + 4.5rem) 0 5rem; }
-  .hero-grid { grid-template-columns: 1fr; gap: 4.5rem; }
-  .hero-copy { max-width: 34rem; }
-  .hero-plate { justify-self: start; max-width: 260px; }
   .section-head { grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
 }
 @media (max-width: 900px) {
   .site-nav { height: 68px; }
-  .nav-links { display: none; }
-  .menu-toggle { display: flex; }
-  .nav-links.open {
-    display: flex; flex-direction: column; align-items: stretch;
-    gap: 0;
-    position: absolute; left: 0; right: 0; top: calc(100% + 14px);
-    padding: 1rem 1.6rem 1.4rem;
-    background: var(--white);
-    border: 1px solid var(--line); border-radius: 3px;
-    box-shadow: var(--shadow-md);
-  }
-  .nav-links.open a { padding: .85rem 0; font-size: .86rem; letter-spacing: .08em; border-bottom: 1px solid var(--line-soft); }
-  .nav-links.open a::after { display: none; }
-  .nav-links.open .nav-cta { margin-top: 1.1rem; border-bottom: 0; text-align: center; }
-  .container, .footer-inner { padding: 0 1.5rem; }
-  .nav-inner { padding: 0 1.5rem; }
+  main > section:first-child { padding-top: calc(var(--nav-h) + 4rem); }
+  .container, .footer-inner, .nav-inner { padding: 0 1.5rem; }
 }
 @media (max-width: 768px) {
-  section { padding: 5rem 0; }
-  .plate-frame { display: none; }
-  .hero-plate { max-width: 220px; }
+  section { padding: 4.5rem 0; }
   .section-head { margin-bottom: 3rem; }
   .project-row { grid-template-columns: 2.6rem minmax(0, 1fr); gap: 1rem 1.25rem; padding: 2rem 0; }
   .project-row:hover { padding-left: 0; }
   .row-meta { grid-column: 2; justify-content: space-between; gap: 1.5rem; }
   .row-title { font-size: 1.4rem; }
-  .cta-panel { padding: 3.5rem 1.6rem; }
-  .cta-meta { gap: 1.2rem 1.8rem; }
   .footer-inner { flex-direction: column; text-align: center; }
 }
 @media (max-width: 480px) {
   .container, .footer-inner, .nav-inner { padding: 0 1.2rem; }
   .brand-text em { display: none; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .btn { width: 100%; }
   .row-tag { display: none; }
+  .nav-cta { padding: .65rem 1.1rem; letter-spacing: .12em; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -451,72 +268,25 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
 <!-- Navigation -->
 <header class="site-nav" id="navbar">
   <div class="nav-inner">
-    <a href="#top" class="brand">
+    <div class="brand">
       <span class="brand-mark" aria-hidden="true">Y</span>
       <span class="brand-text">
         <strong>YiZhiQvQ</strong>
-        <em>个人项目</em>
+        <em>作品索引</em>
       </span>
-    </a>
-    <nav class="nav-links" id="navLinks" aria-label="主导航">
-      <a href="#projects">项目</a>
-      <a href="#about">关于</a>
-      <a href="https://github.com/YiZhiQvQ" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" type="button" aria-label="展开菜单" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span>
-    </button>
+    </div>
+    <a href="https://github.com/YiZhiQvQ" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- Hero -->
-  <section class="hero" id="top">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Personal Projects · 个人项目集</p>
-        <h1>
-          安静地把<br>
-          <span class="line-2"><span id="typing-text">问题解决好</span><span class="cursor" aria-hidden="true"></span></span>
-        </h1>
-        <p class="lede">
-          这里收录我写下并持续维护的软件作品。它们大多解决具体而琐碎的问题——
-          克制的界面，可靠的逻辑，装上去之后，最好让人忘记它的存在。
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-dark">
-            浏览项目
-          </a>
-          <a href="https://github.com/YiZhiQvQ" class="btn btn-quiet" target="_blank" rel="noopener">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 00-.9-2.6c3-.3 6.1-1.5 6.1-6.7A5.2 5.2 0 0019.9 5a4.9 4.9 0 00-.1-3.6s-1.1-.3-3.6 1.4a12.3 12.3 0 00-6.4 0C7.3 1.1 6.2 1.4 6.2 1.4A4.9 4.9 0 006.1 5 5.2 5.2 0 004.8 8.8c0 5.2 3.1 6.4 6.1 6.7a3.4 3.4 0 00-.9 2.6V22"/></svg>
-            GitHub
-          </a>
-        </div>
-        <ul class="hero-meta">
-          <li>开源共享</li>
-          <li>Windows · Web</li>
-          <li>持续维护</li>
-        </ul>
-      </div>
-
-      <figure class="hero-plate" aria-hidden="true">
-        <span class="plate-frame"></span>
-        <div class="plate-face">
-          <span class="monogram">YQ</span>
-          <span class="plate-rule"></span>
-          <p>Quiet tools<br>carefully made</p>
-        </div>
-      </figure>
-    </div>
-  </section>
-
   <!-- Projects -->
-  <section id="projects" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <section id="projects">
     <div class="container">
       <header class="section-head reveal">
         <div>
-          <p class="eyebrow">01 — 项目</p>
+          <p class="eyebrow">Projects · 项目</p>
           <h2>作品<span class="accent">索引</span></h2>
         </div>
         <p class="section-note">每一个项目都配有独立的介绍页面，包含功能说明、界面预览与下载入口。</p>
@@ -564,27 +334,6 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about">
-    <div class="container">
-      <div class="cta-panel reveal">
-        <div class="cta-inner">
-          <p class="eyebrow">开源 · 交流</p>
-          <h2>关于<span class="accent">这些项目</span></h2>
-          <p>所有项目都开源在 GitHub，欢迎提交 Issue 或 Pull Request。若有想法或合作意向，也欢迎随时联系。</p>
-          <a href="https://github.com/YiZhiQvQ" class="btn btn-dark" target="_blank" rel="noopener">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 00-.9-2.6c3-.3 6.1-1.5 6.1-6.7A5.2 5.2 0 0019.9 5a4.9 4.9 0 00-.1-3.6s-1.1-.3-3.6 1.4a12.3 12.3 0 00-6.4 0C7.3 1.1 6.2 1.4 6.2 1.4A4.9 4.9 0 006.1 5 5.2 5.2 0 004.8 8.8c0 5.2 3.1 6.4 6.1 6.7a3.4 3.4 0 00-.9 2.6V22"/></svg>
-            访问 GitHub
-          </a>
-          <div class="cta-meta">
-            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>源码完全开放</span>
-            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>问题与建议欢迎反馈</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </main>
 
 <!-- Footer -->
@@ -599,32 +348,6 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
 </footer>
 
 <script>
-/* ===== Typing animation ===== */
-(function () {
-  var el = document.getElementById('typing-text');
-  var text = '问题解决好';
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduce) { el.textContent = text; return; }
-
-  el.textContent = '';   /* 清空 HTML 中的降级文案，再开始打字 */
-  var i = 0, deleting = false;
-  function tick() {
-    if (!deleting) {
-      i++;
-      el.textContent = text.slice(0, i);
-      if (i === text.length) { setTimeout(function () { deleting = true; tick(); }, 2400); return; }
-      setTimeout(tick, 170);
-    } else {
-      i--;
-      el.textContent = text.slice(0, i);
-      if (i === 0) { setTimeout(function () { deleting = false; tick(); }, 700); return; }
-      setTimeout(tick, 80);
-    }
-  }
-  setTimeout(tick, 800);
-})();
-
 /* ===== Navbar scroll state ===== */
 (function () {
   var nav = document.getElementById('navbar');
@@ -649,52 +372,6 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   els.forEach(function (el) { observer.observe(el); });
-})();
-
-/* ===== Mobile navigation ===== */
-(function () {
-  var toggle = document.getElementById('menuToggle');
-  var links = document.getElementById('navLinks');
-
-  function close() {
-    links.classList.remove('open');
-    toggle.classList.remove('active');
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-
-  toggle.addEventListener('click', function (e) {
-    e.stopPropagation();
-    var open = links.classList.toggle('open');
-    toggle.classList.toggle('active', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
-  links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
-
-  document.addEventListener('click', function (e) {
-    if (!links.contains(e.target) && !toggle.contains(e.target)) close();
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') close();
-  });
-})();
-
-/* ===== Smooth scroll with fixed-nav offset ===== */
-(function () {
-  var nav = document.getElementById('navbar');
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      var href = this.getAttribute('href');
-      if (!href || href === '#') return;
-      var target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      var offset = nav.offsetHeight + 16;
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
-      history.replaceState(null, '', href);
-    });
-  });
 })();
 </script>
 
