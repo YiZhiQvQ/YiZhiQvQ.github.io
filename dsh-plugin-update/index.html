@@ -535,10 +535,11 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       </span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="主导航">
-      <a href="#why">为什么</a>
+      <a href="#features">功能</a>
       <a href="#states">状态</a>
       <a href="#how">怎么更新</a>
       <a href="#install">安装</a>
+      <a href="#faq">问题</a>
       <a href="https://github.com/YiZhiQvQ/dsh-plugin-update" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="展开菜单" aria-expanded="false" aria-controls="navLinks">
@@ -559,8 +560,8 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <span class="accent">检查并更新插件</span>
         </h1>
         <p class="lede">
-          从 npm 装进 profile 的插件会一直停在当初装的那个版本，DSH 不会提示有新版本。
-          这个插件在插件详情页加一个「检查更新」按钮，有新版本就卸载旧版、装上新版；装失败会把旧版装回去。
+          打开任意一个从 npm 装的插件详情页，右上角会多一个「检查更新」。有新版本就卸载旧版、装上新版；
+          装失败会把旧版装回去。
         </p>
         <div class="hero-actions">
           <a href="#install" class="btn btn-dark">
@@ -581,15 +582,15 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     </div>
   </section>
 
-  <!-- Why -->
-  <section id="why">
+  <!-- Features -->
+  <section id="features">
     <div class="container">
       <header class="section-head reveal">
         <div>
-          <p class="eyebrow">01 — 为什么</p>
-          <h2>为什么需要它</h2>
+          <p class="eyebrow">01 — 功能</p>
+          <h2>用起来是什么样</h2>
         </div>
-        <p class="section-note">因为 DSH 本身不提供这个能力。三处具体缺口：</p>
+        <p class="section-note">不占侧栏，不加菜单，所有控件都在插件自己的详情页里。</p>
       </header>
 
       <div class="features-grid">
@@ -598,17 +599,17 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <div class="feature-icon">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
           </div>
-          <h3>没人去查 npm</h3>
-          <p><code>list_bundles</code> 只报已安装版本和保存的依赖说明，不查仓库。插件页的「更新」按钮只给安装时自带的 Official 目录条目，其它插件没有。</p>
+          <h3>详情页多一个按钮</h3>
+          <p>打开插件的详情页，右上角「检查更新」就挨着开关和卸载。点了才去查，不点不发请求。</p>
         </article>
 
         <article class="feature reveal">
           <span class="feature-index" aria-hidden="true">02</span>
           <div class="feature-icon">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"/></svg>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
           </div>
-          <h3>更新只能先卸后装</h3>
-          <p><code>install_bundle</code> 遇到已安装的包直接返回 <code>already-installed</code>。所以升级必须 remove 再 install，中间漏一步插件就没了。</p>
+          <h3>有新版本直接显示</h3>
+          <p>标题旁出现「有新版本 4.10.0」，按钮变成「更新到 4.10.0」。点之前会再确认一次，确认后自动卸载旧版、装新版、重新加载。</p>
         </article>
 
         <article class="feature reveal">
@@ -616,9 +617,15 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <div class="feature-icon">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
           </div>
-          <h3>失败要能退回</h3>
-          <p>装新版失败时，自动把原来的依赖说明装回去，不会留下一个缺失的插件。原来写 <code>^4.8.1</code> 的继续写 <code>^4.10.0</code>，锁死版本的继续锁死。</p>
+          <h3>失败会装回旧版</h3>
+          <p>装新版失败时，把原来的依赖说明装回去，插件不会变成缺失状态。原来写 <code>^4.8.1</code> 的继续写 <code>^4.10.0</code>，锁死版本的继续锁死。</p>
         </article>
+      </div>
+
+      <div class="reveal" style="max-width:52rem;margin-top:3.4rem;padding-top:2.2rem;border-top:1px solid var(--line);">
+        <p style="color:var(--muted);font-weight:300;font-size:.9rem;line-height:1.95;">
+          页面上会写清楚：已安装哪个版本、上游最新是哪个、查的是哪个 registry。查不到或不能装时也会写出原因，而不是只给一个按不动的按钮。
+        </p>
       </div>
     </div>
   </section>
@@ -629,19 +636,19 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       <header class="section-head reveal">
         <div>
           <p class="eyebrow">02 — 状态</p>
-          <h2>检查结果的五种情况</h2>
+          <h2>检查结果有五种</h2>
         </div>
-        <p class="section-note">页面上会写明：已安装哪个版本、npm 上最新是哪个、查的是哪个 registry，以及不能更新时的原因。</p>
+        <p class="section-note">每一种都会在页面上说明原因，不用猜。</p>
       </header>
 
       <dl class="states reveal">
         <div class="state">
           <dt>可更新</dt>
-          <dd>有新版本，且 <code>engines.dsh</code>（没有则看 <code>@deepseek-ai/dsh</code> 的 peer 范围）允许当前 DSH 版本。按钮变成「更新到 x.y.z」，点击前会再确认一次。</dd>
+          <dd>有新版本，且 <code>engines.dsh</code>（没有则看 <code>@deepseek-ai/dsh</code> 的 peer 范围）允许当前 DSH 版本。按钮变成「更新到 x.y.z」。</dd>
         </div>
         <div class="state">
           <dt>不兼容</dt>
-          <dd>有新版本，但它要求更高的 DSH。会显示要求来自哪个字段，<b>不显示更新按钮</b>，避免装完启动不了。</dd>
+          <dd>有新版本，但它要求更高的 DSH。显示要求来自哪个字段，不出现更新按钮，避免装完启动不了。</dd>
         </div>
         <div class="state">
           <dt>已是最新</dt>
@@ -653,7 +660,7 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
         </div>
         <div class="state">
           <dt>不支持</dt>
-          <dd>依赖是本地链接、Git 地址、压缩包或别名。<b>这些不会被碰</b>，页面会说明原因，而不是给一个按了没用的按钮。</dd>
+          <dd>依赖是本地链接、Git 地址、压缩包或别名。这类会直接说明不去问 npm，也不显示按钮。</dd>
         </div>
       </dl>
     </div>
@@ -667,7 +674,7 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <p class="eyebrow">03 — 怎么更新</p>
           <h2>更新时发生了什么</h2>
         </div>
-        <p class="section-note">Host 端调用 profile 自己的 <code>pluginManager</code>，和插件页、<code>plugin_manager</code> 工具是同一套逻辑，不是自己另写一份 pnpm 调用。</p>
+        <p class="section-note">Host 端调用 profile 自己的 <code>pluginManager</code>，和插件页、<code>plugin_manager</code> 工具是同一套逻辑。</p>
       </header>
 
       <div class="steps">
@@ -689,10 +696,10 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       </div>
 
       <div class="reveal" style="max-width:52rem;margin-top:4rem;padding-top:2.4rem;border-top:1px solid var(--line);">
-        <p class="eyebrow" style="margin-bottom:1.2rem;">三个副作用</p>
+        <p class="eyebrow" style="margin-bottom:1.2rem;">更新之后</p>
         <ul class="plain-list">
           <li><b>装配顺序会变。</b>重装后的 bundle 排到 <code>dsh.profile.bundles</code> 末尾，而这个顺序就是配置优先级。两个插件改同一行配置时，更新过的那个最后生效。</li>
-          <li><b>它不更新自己。</b>卸载自己会连带撤掉正在响应请求的路由，所以这个按钮不存在。</li>
+          <li><b>可能需要重启。</b>页面会提示 <code>restart-required</code> 的情况，重启一次 DSH 就好。</li>
           <li><b>查的是同一个 registry。</b>按插件管理器的顺序问同一批源。profile 配了 <code>registry.npmmirror.com</code> 就查镜像，不会绕回 npmjs。</li>
         </ul>
       </div>
@@ -745,19 +752,15 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     <div class="container">
       <header class="section-head reveal">
         <div>
-          <p class="eyebrow">05 — 常见问题</p>
-          <h2>几个问题</h2>
+          <p class="eyebrow">05 — 问题</p>
+          <h2>常见问题</h2>
         </div>
-        <p class="section-note">范围就这么大，写清楚免得误会。</p>
+        <p class="section-note">几件会被问到的事。</p>
       </header>
 
       <div class="faq-list">
         <details class="faq-item reveal">
-          <summary>会动 Harness 自带的插件吗？</summary>
-          <div class="faq-body">不会。只检查从 npm 装进当前 profile 的插件包。官方自带的、本地链接的、Git 安装的都不碰。</div>
-        </details>
-        <details class="faq-item reveal">
-          <summary>检查时会往外发什么？</summary>
+          <summary>检查的时候会往外发什么？</summary>
           <div class="faq-body">只读 npm 的公开版本信息，不发送本地路径、配置或密钥。只有你点「更新」并确认之后才会真的改文件。</div>
         </details>
         <details class="faq-item reveal">
@@ -765,12 +768,16 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <div class="faq-body">只问当前打开的这一页。其它包的 registry 文档走十分钟缓存，不会每次都请求。</div>
         </details>
         <details class="faq-item reveal">
-          <summary>为什么侧栏里看不到它？</summary>
+          <summary>侧栏里怎么找不到它？</summary>
           <div class="faq-body">它不新增侧栏入口，控件只加在插件页面的详情视图里，和插件自己的开关、卸载放在一起。</div>
         </details>
         <details class="faq-item reveal">
-          <summary>能更新 DSH 本体吗？</summary>
-          <div class="faq-body">不能。它只管 profile 里的插件包。DSH 本体和官方自带插件的更新走 DSH 自己的更新流程。</div>
+          <summary>更新失败会怎样？</summary>
+          <div class="faq-body">会自动把原来的依赖说明装回去，插件仍然可用。失败原因写在页面下方，可以再点一次重试。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>为什么按钮是灰的或不存在？</summary>
+          <div class="faq-body">说明这个包不是从 npm 装的，或者当前 profile 没有在跑它。页面会写出具体原因。</div>
         </details>
       </div>
     </div>

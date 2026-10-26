@@ -532,7 +532,8 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       <a href="#features">功能</a>
       <a href="#preview">界面</a>
       <a href="#install">安装</a>
-      <a href="#notes">注意</a>
+      <a href="#usage">使用</a>
+      <a href="#help">排查</a>
       <a href="https://github.com/YiZhiQvQ/dsh-remote" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="展开菜单" aria-expanded="false" aria-controls="navLinks">
@@ -554,8 +555,7 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
         </h1>
         <p class="lede">
           电脑上跑着 DSH，手机或平板连同一个 Wi-Fi，浏览器打开 <code>http://电脑IP:3080</code>，
-          输入管理员账号密码，看到的就是电脑上那个会话。插件本身是一个反向代理加一个登录页，
-          没有成员账号，也没有工作区隔离。
+          输入管理员账号密码，看到的就是电脑上那个会话。插件本身是一个反向代理加一个登录页。
         </p>
         <div class="hero-actions">
           <a href="#install" class="btn btn-dark">
@@ -590,9 +590,9 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       <header class="section-head reveal">
         <div>
           <p class="eyebrow">01 — 功能</p>
-          <h2>它做了<span class="accent">什么</span></h2>
+          <h2>它做了什么</h2>
         </div>
-        <p class="section-note">一共四件事：把 127.0.0.1 上的 DSH 开到局域网、前面挡一个登录页、给窄屏换一套布局、补上手机端的文件上传下载。</p>
+        <p class="section-note">把只监听 127.0.0.1 的 DSH 开到局域网，前面加一个登录页，再给手机补一套布局和文件传输。</p>
       </header>
 
       <div class="features-grid">
@@ -692,29 +692,78 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           也可以直接在 profile 的插件配置里写明文账号密码，但不推荐。
         </p>
         <div class="code">scripts\set-remote-password.ps1</div>
+        <p style="margin-top:1.6rem;color:var(--faint);font-weight:300;font-size:.82rem;line-height:1.9;max-width:44rem;">
+          登录用的就是桌面那份权限，能读写 DSH 进程能访问的文件；服务本身是明文 HTTP，只在可信局域网里开。
+          要临时关掉，用远程访问面板里的暂停/恢复，它只停 3080 的代理，不卸载插件、不重启 DSH。
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Notes -->
-  <section id="notes" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <!-- Usage -->
+  <section id="usage" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
     <div class="container">
       <header class="section-head reveal">
         <div>
-          <p class="eyebrow">04 — 注意</p>
-          <h2>用之前<span class="accent">要知道的</span></h2>
+          <p class="eyebrow">04 — 使用</p>
+          <h2>装好之后怎么用</h2>
         </div>
-        <p class="section-note">这是一个单管理员插件，权限模型和桌面窗口完全一样。下面几条都会实际碰到，装之前先看一下。</p>
+        <p class="section-note">日常就三步。桌面窗口照常使用，手机布局只在远程窄屏时启用。</p>
       </header>
 
-      <ul class="plain-list reveal">
-        <li><b>权限等同桌面。</b>登录者就是桌面操作者，能读写 DSH 进程能访问的任意文件。没有成员隔离，不要给不信任的人开。</li>
-        <li><b>目前是明文 HTTP。</b>同一局域网里抓包的人可能拿到会话 Cookie。网络不可信就套 Tailscale，或者在前置做 TLS 终止。</li>
-        <li><b>不负责公网访问。</b>只监听 3080，不做内网穿透，也不改防火墙。要不要做端口映射，需要你自己判断。</li>
-        <li><b>会话有效期 30 天。</b>Cookie 是 HttpOnly、SameSite=Lax，签名绑定当前密码版本，改密码会吊销所有会话。</li>
-        <li><b>启动 token 不下发。</b>DSH 的启动 token 只留在代理进程内存里，不写日志、不进浏览器；上游 <code>dsh-auth-*</code> Cookie 在写回前被剔除。</li>
-        <li><b>暂停用面板里的开关。</b>插件管理器里的总开关会重启 DSH 并切断代理页面；要临时关掉远程访问，用远程访问面板里的暂停/恢复，它只停 3080 的代理。</li>
-      </ul>
+      <div class="steps">
+        <article class="step reveal">
+          <span class="step-num" aria-hidden="true">01</span>
+          <h3>打开地址</h3>
+          <p>手机浏览器输入 <code>http://电脑IP:3080</code>，登录一次，之后 30 天内免登录。换 Wi-Fi 或 IP 变了，重新输一下新地址即可。</p>
+        </article>
+        <article class="step reveal">
+          <span class="step-num" aria-hidden="true">02</span>
+          <h3>加工作区</h3>
+          <p>点「添加工作区」打开应用内目录浏览器：逐级进入、新建文件夹、直接选中当前目录。不用先在电脑上选好。</p>
+        </article>
+        <article class="step reveal">
+          <span class="step-num" aria-hidden="true">03</span>
+          <h3>传文件</h3>
+          <p>「文件」标签把文件拖到目录行上传；聊天框拖入也是走字节上传，不会插入本地路径。产物用预览标题栏的下载按钮取回。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Help -->
+  <section id="help">
+    <div class="container">
+      <header class="section-head reveal">
+        <div>
+          <p class="eyebrow">05 — 排查</p>
+          <h2>打不开的时候</h2>
+        </div>
+        <p class="section-note">这几个问题最常见，按顺序看一遍基本能定位。</p>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary>手机打不开 http://电脑IP:3080</summary>
+          <div class="faq-body">依次确认：手机和电脑在同一个网段；电脑上 DSH 正在运行；Windows 防火墙放行了 3080 入站；<code>http://127.0.0.1:52551/api/remote/info</code> 在本机能返回。局域网地址会自动跳过 169.254 开头的链路本地地址。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>登录后马上又跳回登录页</summary>
+          <div class="faq-body">会话签名绑定当前密码版本，改过密码或代理重启后旧 Cookie 会失效，重新登录一次即可。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>手机上还是桌面布局</summary>
+          <div class="faq-body">手机布局只在远程浏览器视口 ≤900px 时启用（粗指针设备放宽到 1180px），本机 127.0.0.1 窗口永远保持桌面布局。如果 DSH 升级后内部锚点对不上，插件会写入 <code>data-dshm-caps</code> 并保留桌面布局，页面仍然可用。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>大文件上传失败</summary>
+          <div class="faq-body">上传默认上限 512MB，超了会拒绝；目标目录还需要 DSH 进程有写权限。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>换 Wi-Fi 后要不要改配置</summary>
+          <div class="faq-body">不用。局域网地址每次请求从快照读取，默认 5 秒刷新一次，换网后直接用新地址访问。</div>
+        </details>
+      </div>
     </div>
   </section>
 
