@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>dsh-plugin-update — DSH 插件更新检查</title>
-<meta name="description" content="dsh-plugin-update 给 DeepSeek Harness 的插件详情页加上检查更新与一键升级：先卸载再安装，失败时把旧版本装回去。">
+<meta name="description" content="dsh-plugin-update 是 DeepSeek Harness 的插件：在插件详情页检查 npm 上的新版本，一键卸载旧版并安装新版，失败自动回滚。">
 <meta name="theme-color" content="#fbfaf8">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://yizhiqvq.github.io/dsh-plugin-update/">
 <meta property="og:title" content="dsh-plugin-update — 在插件详情页里检查更新">
-<meta property="og:description" content="检查 npm 上有没有新版本，一键完成卸载与重装。">
+<meta property="og:description" content="在插件详情页检查并更新插件，失败自动装回旧版。">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -535,9 +535,9 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       </span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="主导航">
-      <a href="#why">缘由</a>
+      <a href="#why">为什么</a>
       <a href="#states">状态</a>
-      <a href="#how">执行</a>
+      <a href="#how">怎么更新</a>
       <a href="#install">安装</a>
       <a href="https://github.com/YiZhiQvQ/dsh-plugin-update" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
     </nav>
@@ -553,14 +553,14 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
   <section class="hero" id="top">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">DeepSeek Harness · 插件</p>
+        <p class="eyebrow">DeepSeek Harness 插件</p>
         <h1>
-          插件页上，<br>
-          多一个<span class="accent">检查更新</span>
+          在插件页上<br>
+          <span class="accent">检查并更新插件</span>
         </h1>
         <p class="lede">
-          从 npm 装进 profile 的插件，会一直停在当初 pnpm 解析出来的那个版本，而 Web UI 不会告诉你上游发了新版。
-          dsh-plugin-update 把这件事放回插件自己的详情页：查一次，需要的话一键卸载再安装。
+          从 npm 装进 profile 的插件会一直停在当初装的那个版本，DSH 不会提示有新版本。
+          这个插件在插件详情页加一个「检查更新」按钮，有新版本就卸载旧版、装上新版；装失败会把旧版装回去。
         </p>
         <div class="hero-actions">
           <a href="#install" class="btn btn-dark">
@@ -569,13 +569,13 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           </a>
           <a href="https://github.com/YiZhiQvQ/dsh-plugin-update" class="btn btn-quiet" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            GitHub 仓库
+            GitHub
           </a>
         </div>
         <ul class="hero-meta">
-          <li>无需配置</li>
+          <li>不需要配置</li>
           <li>不新增侧栏入口</li>
-          <li>开源 · MIT License</li>
+          <li>MIT License</li>
         </ul>
       </div>
     </div>
@@ -586,10 +586,10 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     <div class="container">
       <header class="section-head reveal">
         <div>
-          <p class="eyebrow">01 — 缘由</p>
-          <h2>为什么需要<span class="accent">它</span></h2>
+          <p class="eyebrow">01 — 为什么</p>
+          <h2>为什么需要它</h2>
         </div>
-        <p class="section-note">插件页面的「更新」只服务安装时自带的 Official 目录，其余插件没有入口。</p>
+        <p class="section-note">因为 DSH 本身不提供这个能力。三处具体缺口：</p>
       </header>
 
       <div class="features-grid">
@@ -598,8 +598,8 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <div class="feature-icon">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
           </div>
-          <h3>没人会去问仓库</h3>
-          <p><code>list_bundles</code> 只报告已安装版本和保存的依赖说明，不会去 npm 查最新版；插件页面也只对自带的 Official 条目显示「更新」。</p>
+          <h3>没人去查 npm</h3>
+          <p><code>list_bundles</code> 只报已安装版本和保存的依赖说明，不查仓库。插件页的「更新」按钮只给安装时自带的 Official 目录条目，其它插件没有。</p>
         </article>
 
         <article class="feature reveal">
@@ -607,8 +607,8 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <div class="feature-icon">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"/></svg>
           </div>
-          <h3>更新等于先卸后装</h3>
-          <p><code>install_bundle</code> 对已安装的包直接返回 <code>already-installed</code>。所以升级永远是 remove 再 install，手做既繁琐也容易漏。</p>
+          <h3>更新只能先卸后装</h3>
+          <p><code>install_bundle</code> 遇到已安装的包直接返回 <code>already-installed</code>。所以升级必须 remove 再 install，中间漏一步插件就没了。</p>
         </article>
 
         <article class="feature reveal">
@@ -616,8 +616,8 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <div class="feature-icon">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
           </div>
-          <h3>失败会装回旧版</h3>
-          <p>安装新版失败时，会把原来的依赖说明再装回去，插件不会变成缺失状态。原本锁死精确版本的 profile 继续锁死。</p>
+          <h3>失败要能退回</h3>
+          <p>装新版失败时，自动把原来的依赖说明装回去，不会留下一个缺失的插件。原来写 <code>^4.8.1</code> 的继续写 <code>^4.10.0</code>，锁死版本的继续锁死。</p>
         </article>
       </div>
     </div>
@@ -629,31 +629,31 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       <header class="section-head reveal">
         <div>
           <p class="eyebrow">02 — 状态</p>
-          <h2>检查结果的<span class="accent">五种情况</span></h2>
+          <h2>检查结果的五种情况</h2>
         </div>
-        <p class="section-note">页面下方会写清已安装版本、上游最新版本、回答的仓库；不能更新时也会写明原因。</p>
+        <p class="section-note">页面上会写明：已安装哪个版本、npm 上最新是哪个、查的是哪个 registry，以及不能更新时的原因。</p>
       </header>
 
       <dl class="states reveal">
         <div class="state">
           <dt>可更新</dt>
-          <dd>存在新版本，且 <code>engines.dsh</code>（没有则看 <code>@deepseek-ai/dsh</code> 的 peer 范围）允许当前运行的 DSH 版本。按钮变成「更新到 x.y.z」。</dd>
+          <dd>有新版本，且 <code>engines.dsh</code>（没有则看 <code>@deepseek-ai/dsh</code> 的 peer 范围）允许当前 DSH 版本。按钮变成「更新到 x.y.z」，点击前会再确认一次。</dd>
         </div>
         <div class="state">
           <dt>不兼容</dt>
-          <dd>有新版本，但它要求更高的 DSH。界面显示要求与来源，<b>不出现更新按钮</b>，避免装完起不来。</dd>
+          <dd>有新版本，但它要求更高的 DSH。会显示要求来自哪个字段，<b>不显示更新按钮</b>，避免装完启动不了。</dd>
         </div>
         <div class="state">
           <dt>已是最新</dt>
-          <dd>装的就是最新版，不需要动作。</dd>
+          <dd>装的就是最新版。没有可点的按钮。</dd>
         </div>
         <div class="state">
           <dt>读取失败</dt>
-          <dd>仓库读不到——离线、404 或文档格式异常。原因会写出来，「检查更新」可以重试。</dd>
+          <dd>仓库读不到：离线、404 或返回的文档格式不对。会写出原因，「检查更新」可以重试。</dd>
         </div>
         <div class="state">
           <dt>不支持</dt>
-          <dd>依赖是本地链接、Git 地址、压缩包或别名。<b>这些永远不动</b>，页面会说明为什么不去问 npm。</dd>
+          <dd>依赖是本地链接、Git 地址、压缩包或别名。<b>这些不会被碰</b>，页面会说明原因，而不是给一个按了没用的按钮。</dd>
         </div>
       </dl>
     </div>
@@ -664,36 +664,36 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     <div class="container">
       <header class="section-head reveal">
         <div>
-          <p class="eyebrow">03 — 执行</p>
-          <h2>它调的是<span class="accent">插件管理器</span></h2>
+          <p class="eyebrow">03 — 怎么更新</p>
+          <h2>更新时发生了什么</h2>
         </div>
-        <p class="section-note">Host 半部调用 profile 自己的 pluginManager，和插件页面、plugin_manager 工具走同一套逻辑。</p>
+        <p class="section-note">Host 端调用 profile 自己的 <code>pluginManager</code>，和插件页、<code>plugin_manager</code> 工具是同一套逻辑，不是自己另写一份 pnpm 调用。</p>
       </header>
 
       <div class="steps">
         <article class="step reveal">
           <span class="step-num" aria-hidden="true">01</span>
           <h3>卸载</h3>
-          <p><code>removeBundle(name)</code> 取消选择该插件包、卸载它的所有行，并执行 <code>pnpm remove</code>。</p>
+          <p><code>removeBundle(name)</code>：取消选择该 bundle、卸载它的行、执行 <code>pnpm remove</code>。</p>
         </article>
         <article class="step reveal">
           <span class="step-num" aria-hidden="true">02</span>
           <h3>安装</h3>
-          <p><code>installBundle(spec, { enabled, registry })</code> 装上并重新选择。<code>enabled</code> 会保留你原本关闭的状态。</p>
+          <p><code>installBundle(spec, { enabled, registry })</code>：装新版并重新选择。<code>enabled</code> 保留你原本关着的状态，不会顺手打开。</p>
         </article>
         <article class="step reveal">
           <span class="step-num" aria-hidden="true">03</span>
-          <h3>回滚</h3>
-          <p>第 2 步失败时，把原来的依赖说明再装回去。开启 HMR 时替换无需重启；启动以来一直在跑的包会提示重启。</p>
+          <h3>失败回滚</h3>
+          <p>第 2 步失败就把原来的依赖说明装回去。开了 HMR 的插件替换后立即生效；从 DSH 启动起就在跑的会提示需要重启。</p>
         </article>
       </div>
 
       <div class="reveal" style="max-width:52rem;margin-top:4rem;padding-top:2.4rem;border-top:1px solid var(--line);">
-        <p class="eyebrow" style="margin-bottom:1.2rem;">两个副作用</p>
+        <p class="eyebrow" style="margin-bottom:1.2rem;">三个副作用</p>
         <ul class="plain-list">
-          <li><b>装配顺序会变。</b>重装后的插件包会排到 <code>dsh.profile.bundles</code> 末尾，而这个顺序就是配置优先级。</li>
-          <li><b>它会拒绝更新自己。</b>卸载自己会连带撤掉正在响应请求的路由，所以不提供这个按钮。</li>
-          <li><b>问的是同一个仓库。</b>按 profile 插件管理器的顺序询问同一批 registry，配了镜像的 profile 就查镜像，不会绕回 npmjs。</li>
+          <li><b>装配顺序会变。</b>重装后的 bundle 排到 <code>dsh.profile.bundles</code> 末尾，而这个顺序就是配置优先级。两个插件改同一行配置时，更新过的那个最后生效。</li>
+          <li><b>它不更新自己。</b>卸载自己会连带撤掉正在响应请求的路由，所以这个按钮不存在。</li>
+          <li><b>查的是同一个 registry。</b>按插件管理器的顺序问同一批源。profile 配了 <code>registry.npmmirror.com</code> 就查镜像，不会绕回 npmjs。</li>
         </ul>
       </div>
     </div>
@@ -705,37 +705,37 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       <header class="section-head reveal">
         <div>
           <p class="eyebrow">04 — 安装</p>
-          <h2>三种<span class="accent">装法</span></h2>
+          <h2>安装</h2>
         </div>
-        <p class="section-note">插件本身没有依赖，也不会改你的模型、密钥或其它配置。</p>
+        <p class="section-note">插件没有依赖，也不会改你的模型、密钥或其它配置。三种装法按使用场景选。</p>
       </header>
 
       <div class="steps">
         <article class="step reveal">
           <span class="step-num" aria-hidden="true">01</span>
-          <h3>从 GitHub 直接装</h3>
-          <p>最省事，不需要先下载文件，以后也可以重新装一次来升级。</p>
+          <h3>从 GitHub 装</h3>
+          <p>不需要先下载文件，记成 Git 地址，以后重新装一次就是升级。推荐。</p>
           <div class="code">dsh plugin --profile desktop install \
   https://github.com/YiZhiQvQ/dsh-plugin-update</div>
         </article>
         <article class="step reveal">
           <span class="step-num" aria-hidden="true">02</span>
-          <h3>本地目录</h3>
-          <p>适合要改代码的时候。记成 <code>link:</code> 依赖，编辑后立即生效。</p>
+          <h3>从本地目录装</h3>
+          <p>适合要改代码的时候。记成 <code>link:</code> 依赖，改完立即生效，不用重装。</p>
           <div class="code">dsh plugin --profile desktop install \
-  &lt;绝对路径&gt;/dsh-plugin-update</div>
+  &lt;绝对路径&gt;\dsh-plugin-update</div>
         </article>
         <article class="step reveal">
           <span class="step-num" aria-hidden="true">03</span>
-          <h3>压缩包</h3>
-          <p>记成 <code>file:</code> 依赖并绑定该文件路径，所以 <code>.tgz</code> 要留在原地，移走后需要重装。</p>
+          <h3>从压缩包装</h3>
+          <p>记成 <code>file:</code> 依赖，绑定这个文件的路径。所以 <code>.tgz</code> 要留在原地，移走或删掉就得重装。</p>
           <div class="code">dsh plugin --profile desktop install \
   "D:\dsh-plugins\dsh-plugin-update-0.1.0.tgz"</div>
         </article>
       </div>
 
       <p class="reveal" style="margin-top:3rem;color:var(--muted);font-weight:300;font-size:.9rem;line-height:1.95;">
-        也可以在插件页面右上角「+ 添加插件」里填 GitHub 地址或文件完整路径，效果相同。
+        也可以在插件页面右上角「+ 添加插件」里填 GitHub 地址或文件完整路径，效果一样。
       </p>
     </div>
   </section>
@@ -746,27 +746,31 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
       <header class="section-head reveal">
         <div>
           <p class="eyebrow">05 — 常见问题</p>
-          <h2>几个<span class="accent">边界</span></h2>
+          <h2>几个问题</h2>
         </div>
-        <p class="section-note">它只做一件事，范围也写在这里。</p>
+        <p class="section-note">范围就这么大，写清楚免得误会。</p>
       </header>
 
       <div class="faq-list">
         <details class="faq-item reveal">
-          <summary>它会动 Harness 自带的插件吗？</summary>
-          <div class="faq-body">不会。只检查从 npm 装进当前 profile 的插件包；官方自带的、本地链接的、Git 安装的都不会被碰。</div>
+          <summary>会动 Harness 自带的插件吗？</summary>
+          <div class="faq-body">不会。只检查从 npm 装进当前 profile 的插件包。官方自带的、本地链接的、Git 安装的都不碰。</div>
         </details>
         <details class="faq-item reveal">
-          <summary>检查的时候会发送本地数据吗？</summary>
-          <div class="faq-body">不会。只读 npm 上的公开版本信息。只有你点「更新」并确认之后，才会真的改文件。</div>
+          <summary>检查时会往外发什么？</summary>
+          <div class="faq-body">只读 npm 的公开版本信息，不发送本地路径、配置或密钥。只有你点「更新」并确认之后才会真的改文件。</div>
         </details>
         <details class="faq-item reveal">
-          <summary>一次检查会问多少个包？</summary>
-          <div class="faq-body">只问当前页面这一个包。其它包的仓库文档走十分钟缓存，不会重复请求。</div>
+          <summary>一次检查要问多少个包？</summary>
+          <div class="faq-body">只问当前打开的这一页。其它包的 registry 文档走十分钟缓存，不会每次都请求。</div>
         </details>
         <details class="faq-item reveal">
           <summary>为什么侧栏里看不到它？</summary>
-          <div class="faq-body">它不新增侧栏入口，控件只长在插件页面的详情视图里，和插件自己的开关、卸载放在一起。</div>
+          <div class="faq-body">它不新增侧栏入口，控件只加在插件页面的详情视图里，和插件自己的开关、卸载放在一起。</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>能更新 DSH 本体吗？</summary>
+          <div class="faq-body">不能。它只管 profile 里的插件包。DSH 本体和官方自带插件的更新走 DSH 自己的更新流程。</div>
         </details>
       </div>
     </div>
@@ -777,18 +781,18 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     <div class="container">
       <div class="cta-panel reveal">
         <div class="cta-inner">
-          <p class="eyebrow">开源 · MIT</p>
-          <h2>源码与说明</h2>
-          <p>中文说明、安装步骤和测试方式都在仓库里。</p>
+          <p class="eyebrow">MIT License</p>
+          <h2>说明和源码</h2>
+          <p>中文 README 写的是原理和边界，INSTALL.zh.md 是发给别人照着装的版本。</p>
           <a href="https://github.com/YiZhiQvQ/dsh-plugin-update" class="btn btn-dark" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            前往 GitHub 仓库
+            打开仓库
           </a>
           <div class="cta-meta">
-            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>无需配置</span>
+            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>不需要配置</span>
             <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>桌面版与 Web 版通用</span>
           </div>
-          <p class="cta-foot">中文说明见 <a href="https://github.com/YiZhiQvQ/dsh-plugin-update/blob/main/README.zh.md" target="_blank" rel="noopener">README.zh.md</a>，装给别人看的是 <a href="https://github.com/YiZhiQvQ/dsh-plugin-update/blob/main/INSTALL.zh.md" target="_blank" rel="noopener">INSTALL.zh.md</a></p>
+          <p class="cta-foot">文档：<a href="https://github.com/YiZhiQvQ/dsh-plugin-update/blob/main/README.zh.md" target="_blank" rel="noopener">README.zh.md</a> · <a href="https://github.com/YiZhiQvQ/dsh-plugin-update/blob/main/INSTALL.zh.md" target="_blank" rel="noopener">INSTALL.zh.md</a></p>
         </div>
       </div>
     </div>
