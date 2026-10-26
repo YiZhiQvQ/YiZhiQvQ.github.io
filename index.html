@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YiZhiQvQ — 作品索引</title>
-<meta name="description" content="YiZhiQvQ 的个人项目索引：以南校园网认证客户端 SCUTNetLogin 为代表的若干开源作品。">
+<meta name="description" content="YiZhiQvQ 的个人项目索引：SCUTNetLogin 校园网认证客户端，以及 dsh-remote、dsh-plugin-update 两个 DeepSeek Harness 插件。">
 <meta name="theme-color" content="#fbfaf8">
 <link rel="icon" type="image/jpeg" href="/icon.jpg">
 <link rel="canonical" href="https://yizhiqvq.github.io/">
@@ -218,7 +218,7 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
   flex-wrap: wrap; gap: 1.25rem;
 }
 .footer-text { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
-.footer-links { display: flex; gap: 2rem; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .85rem 2rem; }
 .footer-links a {
   font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--faint); text-decoration: none;
@@ -289,7 +289,7 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           <p class="eyebrow">Projects · 项目</p>
           <h2>作品<span class="accent">索引</span></h2>
         </div>
-        <p class="section-note">每一个项目都配有独立的介绍页面，包含功能说明、界面预览与下载入口。</p>
+        <p class="section-note">每个项目都有独立的介绍页面：做什么、怎么用、去哪里拿。</p>
       </header>
 
       <div class="projects-list">
@@ -310,11 +310,45 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
           </div>
         </a>
 
+        <a href="/dsh-remote/" class="project-row reveal">
+          <span class="row-index" aria-hidden="true">02</span>
+          <div>
+            <h3 class="row-title">
+              <span class="row-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+              </span>
+              dsh-remote
+            </h3>
+            <p class="row-desc">DeepSeek Harness 的局域网远程访问插件。手机或平板用浏览器登录后，操作同一台电脑上的 DSH，窄屏自动切换为手机布局。</p>
+          </div>
+          <div class="row-meta">
+            <span class="row-tag">DSH 插件 / Node.js</span>
+            <span class="row-arrow">查看项目 &rarr;</span>
+          </div>
+        </a>
+
+        <a href="/dsh-plugin-update/" class="project-row reveal">
+          <span class="row-index" aria-hidden="true">03</span>
+          <div>
+            <h3 class="row-title">
+              <span class="row-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"/></svg>
+              </span>
+              dsh-plugin-update
+            </h3>
+            <p class="row-desc">DeepSeek Harness 的插件更新工具。在插件详情页里检查 npm 上的新版本，确认后自动卸载旧版并安装新版，失败时回滚。</p>
+          </div>
+          <div class="row-meta">
+            <span class="row-tag">DSH 插件 / Node.js</span>
+            <span class="row-arrow">查看项目 &rarr;</span>
+          </div>
+        </a>
+
         <!--
           新项目模板：复制下面结构，填入名称、描述与链接，
           并在 /project-name/ 下放置对应的 index.html。
         <a href="/project-name/" class="project-row reveal">
-          <span class="row-index" aria-hidden="true">02</span>
+          <span class="row-index" aria-hidden="true">04</span>
           <div>
             <h3 class="row-title">
               <span class="row-icon">
@@ -343,6 +377,8 @@ footer { border-top: 1px solid var(--line); padding: 2.75rem 0; position: relati
     <div class="footer-links">
       <a href="https://github.com/YiZhiQvQ" target="_blank" rel="noopener">GitHub</a>
       <a href="/scutnetlogin/">SCUTNetLogin</a>
+      <a href="/dsh-remote/">dsh-remote</a>
+      <a href="/dsh-plugin-update/">dsh-plugin-update</a>
     </div>
   </div>
 </footer>

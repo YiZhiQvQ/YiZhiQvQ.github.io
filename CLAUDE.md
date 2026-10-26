@@ -8,8 +8,10 @@ This is a GitHub Pages user site (`YiZhiQvQ.github.io`) hosting a project hub an
 
 - `index.html` — Root hub page: a single "作品索引" (project index) list with nav and footer, using the shared light editorial design system. No hero, no extra sections by design.
 - `scutnetlogin/index.html` — Landing page for **SCUTNetLogin**, a Qt 6.11 / C++17 Windows desktop application that handles campus network authentication (802.1X/EAPOL + DrCOM) for South China University of Technology (华南理工大学).
+- `dsh-remote/index.html` — Landing page for **dsh-remote**, a DeepSeek Harness plugin that adds single-admin LAN remote access (reverse proxy + login gate, mobile layout, upload/download) to the DSH desktop Web GUI.
+- `dsh-plugin-update/index.html` — Landing page for **dsh-plugin-update**, a DeepSeek Harness plugin that checks npm for newer versions of registry-installed plugins and updates them from the plugin detail page.
 
-The SCUTNetLogin application source code lives at `github.com/YiZhiQvQ/SCUTNetLogin`.
+Application sources live at `github.com/YiZhiQvQ/SCUTNetLogin`, `github.com/YiZhiQvQ/dsh-remote`, and `github.com/YiZhiQvQ/dsh-plugin-update`. Plugin pages use screenshots copied from the plugin repos into their `assets/` folders.
 
 ## Adding a new project page
 
@@ -19,9 +21,9 @@ The SCUTNetLogin application source code lives at `github.com/YiZhiQvQ/SCUTNetLo
 
 Access it at `YiZhiQvQ.github.io/myproject/`.
 
-## Design system (shared by both pages)
+## Design system (shared by all pages)
 
-Both pages use the same editorial light-luxury theme: warm off-white background (`--bg: #fbfaf8`), serif headings (Cormorant Garamond / Noto Serif SC), sans body (Inter / Noto Sans SC), muted gold accent (`--gold: #9a7b4f`), hairline `1px` rules, `3px` radii, uppercase letter-spaced labels, and restrained hover lifts. The CSS custom properties at the top of each `<style>` block are duplicated per page — when changing the palette, update both files.
+Both pages use the same editorial light-luxury theme: warm off-white background (`--bg: #fbfaf8`), serif headings (Cormorant Garamond / Noto Serif SC), sans body (Inter / Noto Sans SC), muted gold accent (`--gold: #9a7b4f`), hairline `1px` rules, `3px` radii, uppercase letter-spaced labels, and restrained hover lifts. The CSS custom properties at the top of each `<style>` block are duplicated per page — when changing the palette, update every file.
 
 ## Development
 
